@@ -3,247 +3,222 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>IIT-H Resource Hub — Academic Resources, Reimagined</title>
-<meta name="description" content="Notes, past papers, assignments and reference material for every course at IIT Hyderabad — in one classy, searchable hub.">
+<link rel="icon" type="image/png" href="assets/abhyas-mark.png">
+<title>Abhyas</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,500;0,600;0,700;1,500&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css?v=33">
 </head>
 <body>
+<div class="shell">
 
-<div class="noise-overlay" aria-hidden="true"></div>
-
-<header class="site-header" id="site-header">
-  <div class="container header-inner">
-    <a class="brand" href="#top">
-      <span class="brand-mark" aria-hidden="true">
-        <svg viewBox="0 0 40 40" width="34" height="34">
-          <rect x="2" y="2" width="36" height="36" rx="10" fill="var(--color-accent)"/>
-          <path d="M11 27V13.5L20 9l9 4.5V27" stroke="var(--color-primary-dark)" stroke-width="2" stroke-linejoin="round" fill="none"/>
-          <path d="M11 18.5L20 23l9-4.5" stroke="var(--color-primary-dark)" stroke-width="2" stroke-linejoin="round" fill="none"/>
-          <path d="M20 23v6" stroke="var(--color-primary-dark)" stroke-width="2" stroke-linecap="round"/>
-        </svg>
-      </span>
-      <span class="brand-text">
-        <strong>IIT-H</strong> Resource&nbsp;Hub
-      </span>
-    </a>
-
-    <nav class="main-nav" aria-label="Primary">
-      <a href="#browse">Browse</a>
-      <a href="#contribute">Contribute</a>
-      <a href="#leaderboard">Leaderboard</a>
-      <a href="#about">About</a>
-      <a href="#contact">Contact</a>
-    </nav>
-
-    <div class="header-actions">
-      <a href="#leaderboard" class="btn btn-ghost">Leaderboard</a>
-      <a href="#contribute" class="btn btn-primary">Contribute</a>
+  <header class="top">
+    <div class="wrap top-in">
+      <a class="logo" href="#"><img src="assets/abhyas-mark.png" alt="" width="34" height="34"> Abhyas</a>
+      <nav>
+        <a class="on" href="index.html">Browse</a>
+        <a href="library.html">Library</a>
+        <a href="index.html#archive">Contribute</a>
+      </nav>
+      <button class="btn-add" type="button">Share a file</button>
     </div>
+  </header>
 
-    <button class="nav-toggle" id="navToggle" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-  </div>
-
-  <nav class="mobile-nav" id="mobileNav" aria-label="Mobile">
-    <a href="#browse">Browse</a>
-    <a href="#contribute">Contribute</a>
-    <a href="#leaderboard">Leaderboard</a>
-    <a href="#about">About</a>
-    <a href="#contact">Contact</a>
-  </nav>
-</header>
-
-<main id="top">
-
-  <!-- HERO -->
-  <section class="hero">
-    <div class="hero-glow" aria-hidden="true"></div>
-    <div class="container hero-inner">
-      <p class="eyebrow reveal">IIT Hyderabad</p>
-      <h1 class="hero-title reveal">
-        Everything for class,<br>in one place.
+  <section class="hero" id="archive">
+    <div class="wrap">
+      <h1>
+        <span class="h-muted">Notes, Papers, Books</span>
+        <span class="h-solid">All in one place</span>
       </h1>
-      <p class="hero-sub reveal">
-        Notes, past papers, and assignments — organised by
-        department, semester, and course.
-      </p>
-      <hr class="hero-rule reveal">
+      <p class="hero-sub">Grouped by course. Found in seconds.</p>
 
-      <div class="hero-stats reveal" id="heroStats">
-        <div class="stat">
-          <span class="stat-num" data-count-from="resources">0</span>
-          <span class="stat-label">Resources</span>
+      <div class="search">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg>
+        <input id="q" type="text" placeholder="Search a course, professor or topic…" autocomplete="off">
+        <div class="search-kbd" title="Press ⌘K or / to search"><kbd>⌘</kbd><kbd>K</kbd></div>
+      </div>
+      <div class="pills">
+        <button class="pill on" data-kind="all" type="button"><i></i> Everything</button>
+        <button class="pill" data-kind="papers" type="button"><i style="background:var(--papers)"></i> Past papers</button>
+        <button class="pill" data-kind="notes" type="button"><i style="background:var(--notes)"></i> Notes</button>
+        <button class="pill" data-kind="assignment" type="button"><i style="background:var(--assignment)"></i> Assignments</button>
+        <button class="pill" data-kind="reference" type="button"><i style="background:var(--reference)"></i> Reference</button>
+      </div>
+      <p class="count" id="count"></p>
+    </div>
+  </section>
+
+  <main class="wrap">
+    <div class="grid" id="grid"></div>
+  </main>
+
+  <section class="library">
+    <div class="wrap">
+      <div class="lib-head">
+        <div>
+          <h2>The reference shelf</h2>
+          <p>The textbooks your courses actually lean on.</p>
         </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-num" data-count-from="departments">0</span>
-          <span class="stat-label">Departments</span>
-        </div>
-        <div class="stat-divider"></div>
-        <div class="stat">
-          <span class="stat-num" data-count-from="courses">0</span>
-          <span class="stat-label">Courses</span>
-        </div>
+        <a class="lib-hint lib-all" href="library.html">All shelves &rarr;</a>
+      </div>
+      <div class="shelf">
+        <div class="shelf-row" id="shelfRow"></div>
       </div>
     </div>
   </section>
 
-  <!-- FILTER BAR -->
-  <section class="filter-section" id="browse">
-    <div class="container">
-      <div class="filter-card reveal">
-        <div class="filter-row">
-          <div class="search-field">
-            <svg class="search-icon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2">
-              <circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/>
-            </svg>
-            <input type="text" id="searchInput" placeholder="Search by title, course or professor…" autocomplete="off">
-          </div>
 
-          <div class="dropdown" data-dropdown="department">
-            <button class="dropdown-trigger" type="button">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9.5L12 4l9 5.5M5 10v9h14v-9M10 19v-5h4v5"/></svg>
-              <span class="dropdown-label">Department</span>
-              <svg class="chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="dropdown-panel" role="listbox"></div>
-          </div>
+  <footer class="foot">
+    <div class="wrap">
+      <div class="foot-top">
 
-          <div class="dropdown" data-dropdown="semester">
-            <button class="dropdown-trigger" type="button">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></svg>
-              <span class="dropdown-label">Semester</span>
-              <svg class="chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="dropdown-panel" role="listbox"></div>
-          </div>
-
-          <div class="dropdown" data-dropdown="course">
-            <button class="dropdown-trigger" type="button">
-              <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 19.5A2.5 2.5 0 016.5 17H20M4 19.5A2.5 2.5 0 006.5 22H20V4a2 2 0 00-2-2H6.5A2.5 2.5 0 004 4.5v15z"/></svg>
-              <span class="dropdown-label">Course</span>
-              <svg class="chev" viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>
-            </button>
-            <div class="dropdown-panel" role="listbox"></div>
+        <div class="foot-brand">
+          <a class="foot-mark" href="index.html"><img src="assets/abhyas-mark.png" alt="" width="42" height="42"> Abhyas</a>
+          <p class="foot-blurb">Notes, past papers and textbooks.<br>Grouped by course, open to everyone.</p>
+          <div class="foot-fine">
+            <span class="foot-by">Built with <span class="foot-heart">🧡</span> by <a class="foot-person" href="https://github.com/saichandanmettu" target="_blank" rel="noopener noreferrer"><img src="assets/chandan.png" alt="" width="22" height="22" onerror="this.remove()"><b>Saichandan</b></a></span>
+            <span>&copy; 2026 Abhyas &middot; Shared for educational use</span>
           </div>
         </div>
 
-        <div class="type-row" id="typeRow"></div>
+        <div class="foot-col">
+          <h3>Support</h3>
+          <ul>
+            <li><a href="terms.html">Terms</a></li>
+            <li><a href="mailto:contact@abhyas.iith.online?subject=Feature%20Request">Request a feature</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h3>Explore</h3>
+          <ul>
+            <li><a href="index.html">Browse archive</a></li>
+            <li><a href="library.html">The library</a></li>
+            <li><a href="releases.html">Releases &amp; updates</a></li>
+            <li><a href="#archive">Contribute a file</a></li>
+          </ul>
+        </div>
+
+        <div class="foot-col">
+          <h3>More from IITH</h3>
+          <ul>
+            <li><a href="#">Sanchari &middot; campus transit</a></li>
+            <li><a href="https://ruchi.iith.online">Ruchi &middot; mess menu</a></li>
+            <li><a href="#">Nivas &middot; hostels</a></li>
+            <li><a href="#">IITH Athletics</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="wrap foot-word-wrap">
+      <div class="foot-word" aria-hidden="true">Abhyas</div>
+    </div>
+  </footer>
+
+</div>
+
+<!-- Book Detail Modal -->
+<div class="modal" id="bookModal" role="dialog" aria-modal="true" aria-labelledby="modalBody" hidden>
+  <div class="modal-back"></div>
+  <div class="modal-card">
+    <button class="modal-close" id="modalClose" type="button" aria-label="Close">&times;</button>
+    <div class="modal-cover" id="modalCover"></div>
+    <div class="modal-page">
+      <div id="modalBody"></div>
+      <div class="flap" id="modalFlap" aria-hidden="true"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Course Folder Detail Modal -->
+<div class="modal" id="folderModal" role="dialog" aria-modal="true" aria-labelledby="fmTitle" hidden>
+  <div class="modal-back"></div>
+  <div class="folder-modal-card">
+    <button class="modal-close" id="folderModalClose" type="button" aria-label="Close">&times;</button>
+    <div class="fm-header">
+      <div class="fm-meta-row">
+        <span class="fm-badge-dept" id="fmDept">CS &middot; Sem 3</span>
+        <span class="fm-badge-code" id="fmCode">CS2010</span>
+      </div>
+      <h2 class="fm-title" id="fmTitle">Data Structures and Algorithms</h2>
+      <p class="fm-sub" id="fmSub">All resources for this course, organized by category.</p>
+      <div class="fm-tabs" id="fmTabs">
+        <button class="fm-tab on" data-fmtab="all" type="button">All Files (<span id="fmTabAllCount">0</span>)</button>
+        <button class="fm-tab" data-fmtab="papers" type="button">Past Papers</button>
+        <button class="fm-tab" data-fmtab="notes" type="button">Notes & Slides</button>
+        <button class="fm-tab" data-fmtab="assignment" type="button">Assignments</button>
+        <button class="fm-tab" data-fmtab="reference" type="button">Reference Books</button>
       </div>
     </div>
-  </section>
+    <div class="fm-body" id="fmBody">
+      <!-- Dynamically generated resource rows -->
+    </div>
+    <div class="fm-footer">
+      <button class="btn-share-course" id="fmShareBtn" type="button">
+        <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+        Upload a file to this course
+      </button>
+    </div>
+  </div>
+</div>
 
-  <!-- RESULTS -->
-  <section class="results-section">
-    <div class="container">
-      <div class="results-head reveal">
-        <h2 id="resultsCount">Loading resources…</h2>
-        <div class="sort-field">
-          <label for="sortSelect">Sort by</label>
-          <select id="sortSelect">
-            <option value="recent">Most recent</option>
-            <option value="popular">Most downloaded</option>
-            <option value="az">Title A–Z</option>
+<!-- Share / Contribute Resource Modal -->
+<div class="modal" id="shareModal" role="dialog" aria-modal="true" aria-labelledby="shareModalTitle" hidden>
+  <div class="modal-back"></div>
+  <div class="share-modal-card">
+    <button class="modal-close" id="shareModalClose" type="button" aria-label="Close">&times;</button>
+    <div class="sm-header">
+      <div class="sm-icon">
+        <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
+      </div>
+      <h2 class="sm-title" id="shareModalTitle">Share Course Resources</h2>
+      <p class="sm-sub">Help fellow students by uploading past papers, lecture notes, or assignments.</p>
+    </div>
+    <div class="sm-dropzone" id="smDropzone">
+      <svg viewBox="0 0 24 24" width="36" height="36" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="12" y1="18" x2="12" y2="12"/><line x1="9" y1="15" x2="12" y2="12"/><line x1="15" y1="15" x2="12" y2="12"/></svg>
+      <b>Drag & drop your file here</b>
+      <span>PDF, PPTX, DOCX, ZIP up to 50MB</span>
+      <button class="cta-solid sm-choose-btn" type="button">Browse Files</button>
+      <input type="file" id="smFileInput" style="display:none" multiple>
+    </div>
+    <form class="sm-form" id="smForm" onsubmit="event.preventDefault();">
+      <div class="sm-field">
+        <label for="smCourseInput">Course Name or Code</label>
+        <input type="text" id="smCourseInput" placeholder="e.g. Data Structures (CS2010)" required>
+      </div>
+      <div class="sm-grid">
+        <div class="sm-field">
+          <label for="smTypeSelect">Resource Type</label>
+          <select id="smTypeSelect">
+            <option value="papers">Past Exam Paper / Quiz</option>
+            <option value="notes">Lecture Notes / Slides</option>
+            <option value="assignment">Assignment / Lab Sheet</option>
+            <option value="reference">Reference Book</option>
           </select>
         </div>
-      </div>
-
-      <div class="resource-grid" id="resourceGrid"></div>
-
-      <div class="empty-state" id="emptyState" hidden>
-        <svg viewBox="0 0 24 24" width="48" height="48" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3" stroke-linecap="round"/></svg>
-        <h3>No resources match those filters</h3>
-        <p>Try clearing a filter or searching a broader term.</p>
-        <button class="btn btn-ghost" id="clearFiltersBtn">Clear all filters</button>
-      </div>
-    </div>
-  </section>
-
-  <!-- CONTRIBUTE CTA -->
-  <section class="cta-section" id="contribute">
-    <div class="container cta-inner reveal">
-      <div class="cta-copy">
-        <p class="eyebrow">Contribute</p>
-        <h2>Add your notes.</h2>
-        <p class="cta-sub">
-          Got a quiz, an assignment, or notes worth keeping?
-          Upload them. Takes two minutes, helps the next batch.
-        </p>
-        <a href="#" class="btn btn-primary btn-lg">Upload a resource</a>
-      </div>
-      <div class="cta-visual" aria-hidden="true">
-        <div class="floating-card card-a">
-          <span class="fc-type" style="--dot: var(--type-notes)"></span>
-          <span>Notes</span>
+        <div class="sm-field">
+          <label for="smDeptSelect">Branch</label>
+          <select id="smDeptSelect"></select>
         </div>
-        <div class="floating-card card-b">
-          <span class="fc-type" style="--dot: var(--type-papers)"></span>
-          <span>Past Paper</span>
-        </div>
-        <div class="floating-card card-c">
-          <span class="fc-type" style="--dot: var(--type-reference)"></span>
-          <span>Reference</span>
+        <div class="sm-field">
+          <label for="smYearInput">Academic Year / Sem</label>
+          <input type="text" id="smYearInput" placeholder="e.g. 2024 &middot; Sem 3">
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- LEADERBOARD -->
-  <section class="leaderboard-section" id="leaderboard">
-    <div class="container">
-      <p class="eyebrow reveal center">Leaderboard</p>
-      <h2 class="section-title reveal center">Opens with your first upload</h2>
-      <div class="leaderboard-placeholder reveal">
-        <svg viewBox="0 0 24 24" width="30" height="30" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M8 21h8M12 17v4M7 4h10v5a5 5 0 01-10 0V4z"/><path d="M7 6H4v2a3 3 0 003 3M17 6h3v2a3 3 0 01-3 3"/></svg>
-        <p>No contributions yet — the leaderboard fills in once students start uploading.</p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABOUT -->
-  <section class="about-section" id="about">
-    <div class="container about-inner reveal">
-      <p class="eyebrow">About</p>
-      <h2>Welcome to IIT-H Resource Hub.</h2>
-      <p>
-        A platform designed with the sole purpose of providing valuable academic
-        resources to students of IIT Hyderabad. Developed by students, for students,
-        it offers a centralised repository of notes, assignments, quizzes, and other
-        academic materials — an inclusive space where knowledge can be shared and
-        accessed freely, helping students excel in their academic journeys.
-      </p>
-    </div>
-  </section>
-
-</main>
-
-<footer class="site-footer" id="contact">
-  <div class="container footer-inner">
-    <div class="footer-brand">
-      <span class="brand-mark small" aria-hidden="true">
-        <svg viewBox="0 0 40 40" width="26" height="26">
-          <rect x="2" y="2" width="36" height="36" rx="10" fill="var(--color-accent)"/>
-          <path d="M11 27V13.5L20 9l9 4.5V27" stroke="var(--color-primary-dark)" stroke-width="2" stroke-linejoin="round" fill="none"/>
-          <path d="M11 18.5L20 23l9-4.5" stroke="var(--color-primary-dark)" stroke-width="2" stroke-linejoin="round" fill="none"/>
-        </svg>
-      </span>
-      <span>IIT-H Resource Hub</span>
-    </div>
-    <p class="footer-note">A student-run project · Not an official IIT Hyderabad service</p>
-    <div class="footer-links">
-      <a href="#browse">Browse</a>
-      <a href="#contribute">Contribute</a>
-      <a href="#about">About</a>
-      <a href="mailto:hello@resourcehub.iith.online">Contact</a>
-    </div>
+      <button class="cta-solid sm-submit-btn" id="smSubmitBtn" type="submit">Submit Resource</button>
+    </form>
   </div>
-</footer>
+</div>
 
-<script src="data.js"></script>
-<script src="main.js"></script>
+<!-- Floating Toast Notification -->
+<div class="toast" id="toast" aria-live="polite" hidden></div>
+
+<script src="data.js?v=5"></script>
+<script src="books.js?v=4"></script>
+<script src="app.js?v=5"></script>
 </body>
 </html>
