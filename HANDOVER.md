@@ -48,7 +48,7 @@ going to an inbox nobody reads any more.
 |---|---|---|---|---|
 | Domain (`iith.online`) | | | | |
 | Web hosting | Hostinger | | | |
-| Code repository | GitHub | `saichandanmettu` | n/a | |
+| Code repository | GitHub | `chandanmettu` | n/a | |
 | Vote counter API | Google Apps Script | | n/a | |
 | PDF viewer credential | Adobe | *not yet set up* | | |
 
