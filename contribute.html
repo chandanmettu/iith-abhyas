@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@1,6..72,300;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=164">
+<link rel="stylesheet" href="styles.css?v=165">
 </head>
 <body>
 <div class="shell">
@@ -266,17 +266,18 @@
                 <span>Resource Kind</span>
               </label>
               <div class="cg-kind-selector" id="cgKindSelector"></div>
+              <p class="cg-label-hint">Suggesting a reference book? Use Email Dispatch.</p>
             </div>
 
             <div class="cg-intake-drop">
-              <div class="cg-dropzone" id="cgDropzone">
-                <input type="file" id="cgFileInput" multiple accept=".pdf,application/pdf" style="display:none">
+              <div class="cg-dropzone" id="cgDropzone" role="button" tabindex="0" aria-label="Select one PDF to upload">
+                <input type="file" id="cgFileInput" accept=".pdf,application/pdf" style="display:none">
                 <div class="cg-dropzone-icon">
                   <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
                 </div>
-                <h3>Drop your files here, or browse</h3>
-                <p>PDF only &middot; combine photos into one PDF first &middot; up to 25 MB each</p>
-                <span class="cg-dropzone-btn">Select Files from Device</span>
+                <h3>Drop one PDF here, or browse</h3>
+                <p>One PDF at a time &middot; combine photos into a PDF &middot; up to 25 MB</p>
+                <span class="cg-dropzone-btn">Select PDF from Device</span>
               </div>
               <div class="cg-file-list" id="cgFileList"></div>
             </div>
@@ -294,6 +295,11 @@
             <div class="cg-field">
               <label class="cg-label" for="cgCourseName">Course / Subject Name</label>
               <input class="cg-input" id="cgCourseName" type="text" placeholder="e.g. Operating Systems, Modern Physics" autocomplete="off">
+            </div>
+
+            <div class="cg-field">
+              <label class="cg-label" for="cgDept">Department / Branch *</label>
+              <select class="cg-select" id="cgDept"><option value="">Select your department / branch…</option></select>
             </div>
 
             <div class="cg-field">
@@ -380,7 +386,7 @@
         <div class="cg-panel" id="cgPanel-link" role="tabpanel">
           <div class="cg-cloud-box">
             <div class="cg-callout">
-              Got a whole folder of notes and papers on Drive or OneDrive? Paste the link and we will pull the files across by hand. Please make sure the link is set so anyone with it can view.
+              Got a whole folder of notes and papers on Drive or OneDrive? Paste the link to open a pre-filled email draft, then send it to us. Please make sure anyone with the link can view the folder.
             </div>
 
             <div class="cg-form-grid">
@@ -403,7 +409,7 @@
                 Folders are reviewed in accordance with our <a href="terms.html">terms</a>.
               </p>
               <button class="cg-submit-btn" id="cgLinkSubmitBtn" type="button">
-                Submit Cloud Folder
+                Open Email Draft
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </button>
             </div>
@@ -493,7 +499,7 @@
                 <span class="ctr-rule-mark">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 </span>
-                <span class="ctr-rule-text"><b>Semester batches.</b> Sharing a batch zip helps everyone.</span>
+                <span class="ctr-rule-text"><b>More than one paper?</b> Send each as a separate PDF, one minute apart.</span>
               </li>
             </ul>
           </div>
@@ -739,6 +745,6 @@
 <script src="lenis.min.js"></script>
 <script src="smooth.js?v=10"></script>
 <script src="data.js?v=14"></script>
-<script src="contribute.js?v=12"></script>
+<script src="contribute.js?v=13"></script>
 </body>
 </html>

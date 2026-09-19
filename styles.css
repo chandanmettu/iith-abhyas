@@ -5142,6 +5142,8 @@ main > #shelves { padding-top: 34px; padding-bottom: var(--section-y); }
 }
 .cg-kind-opt {
   position: relative;
+  font: inherit;
+  color: inherit;
   background: var(--surface);
   border: 1px solid var(--hair);
   border-radius: var(--r-md);
@@ -5156,6 +5158,10 @@ main > #shelves { padding-top: 34px; padding-bottom: var(--section-y); }
 .cg-kind-opt:hover {
   transform: translateY(-2px);
   border-color: rgba(40, 33, 41, .2);
+}
+.cg-kind-opt:focus-visible, .cg-dropzone:focus-visible {
+  outline: 2px solid var(--papers);
+  outline-offset: 3px;
 }
 .cg-kind-opt.on {
   border-color: var(--opt-k);
