@@ -1,8 +1,9 @@
 # Abhyas — roadmap
 
-**Internal only. Not linked from the site, not meant for visitors.** This is
-the working checklist for what's left before the archive is a real, running
-service instead of a well-built shell around placeholder data.
+**Historical implementation checklist.** Abhyas is now a live, populated
+service, and Phase 4 public submissions/moderation have shipped. Unchecked items
+below are retained as the reasoning record; use `README.md` and `HANDOVER.md`
+for current state and priorities.
 
 Order matters — each phase mostly unblocks the next one. Don't skip ahead
 just because a later box looks easier; §6.1 explains why.

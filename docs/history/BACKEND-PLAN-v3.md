@@ -134,11 +134,11 @@ in v3's `publish`/`edit`/`delete`, CSRF, or atomic writes changed shape.
   submission has no business being reachable there before a human signs
   off on it, and physical separation means there's no filter to forget.
 
-## 7. Still open — same two owner calls as before
+## 7. Current operational follow-through
 
-Unchanged from `BACKEND-PLAN-v2.md` §8: the PDF viewer (settled separately,
-see `roadmap.md` §2 — self-hosted PDF.js) and whether/when Phase 4 launches
-at all (deferred, per this document). The four hPanel facts in v2 §8.4
-(backup coverage, `php_flag engine off` vs `RemoveHandler`, inode limit,
-git deployment) still need checking once staging is up — nothing about v3
-changes what those answers need to be.
+The viewer decision is closed (self-hosted PDF.js) and Phase 4 is live. The
+remaining work is operational: enable the outer `/admin/` Basic Auth layer,
+verify the host's handler rules, establish off-host PDF/JSON backups, replace
+the student-specific takedown address and document at least two maintainers for
+every account dependency. `README.md` and `HANDOVER.md` are the maintained
+current-state documents.
