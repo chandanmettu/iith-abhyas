@@ -6,8 +6,8 @@ notes, assignments, papers and reference-book pointers.
 | | |
 |---|---|
 | **Live** | [abhyas.iith.online](https://abhyas.iith.online) |
-| **Repository** | `github.com/chandanmettu/iith-resource-hub` (public). The local folder is `IITH Resource Hub`, which was the old name. |
-| **Push via** | SSH host alias `github-iith-resource-hub` (deploy key `~/.ssh/iith-resource-hub-deploy`) |
+| **Repository** | `github.com/chandanmettu/iith-abhyas` (public). It was `iith-resource-hub` until 2026-09-19. |
+| **Push via** | SSH host alias `github-iith-resource-hub` (deploy key `~/.ssh/iith-resource-hub-deploy`). The alias keeps the old name on purpose. |
 | **Deploy** | Hostinger Git auto-deploy from `main`. **A push is a production release.** |
 | **Agent policy** | Commit when asked and **ask before pushing** (no standing auto-push). |
 | **Stack** | Plain HTML/CSS/JS plus a small PHP/JSON backend. No build step, no database. |
@@ -75,7 +75,7 @@ they are not automatically the current production catalogue.
 1. Read [`DESIGN.md`](DESIGN.md) before visual work.
 2. Read [`ADMIN.md`](ADMIN.md) before publishing or moderating resources.
 3. Read [`HANDOVER.md`](HANDOVER.md) for ownership, backup and recovery.
-4. Review the workspace [`DEPLOY.md`](../DEPLOY.md) before a Git release.
+4. Review the workspace [`DEPLOY.md`](../../DEPLOY.md) before a Git release.
 5. Bump every affected CSS/JS `?v=` reference after edits, then run local
    checks and `git diff --check` before pushing.
 6. Verify the live page/API and any removed server file with a cache-busted
