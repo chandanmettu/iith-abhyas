@@ -1,7 +1,7 @@
 # Abhyas — admin runbook
 
 Short, task-oriented. For *why* things are built this way, see
-`BACKEND-PLAN-v3.md`; for the wider handoff picture, see `HANDOVER.md`.
+`docs/history/BACKEND-PLAN-v3.md`; for the wider handoff picture, see `HANDOVER.md`.
 
 ---
 

@@ -1,6 +1,6 @@
 # Abhyas — backend & moderation plan
 
-**Author:** Claude · **Status:** proposal for adversarial review
+**Author:** Claude · **Status:** historical design record; implementation has since shipped
 **Purpose:** hand this to a second reviewer to attack. Section 11 lists the
 weaknesses I already know about — attacking those is more useful than
 attacking the parts I'm confident in.
@@ -12,9 +12,9 @@ attacking the parts I'm confident in.
 A course-resource archive for IIT Hyderabad. Students arrive knowing a course
 code, and leave with a past paper, notes, an assignment, or a textbook.
 
-Current state: a **static site** — plain HTML/CSS/JS, no build step, no
-server code. Six pages, one stylesheet, a `RESOURCES` array in `data.js` that
-is currently placeholder data. There are no real PDFs yet.
+The state described below was the pre-backend design point. The current site is
+live with PHP/JSON publishing, public submission quarantine and moderation;
+see `README.md` and `HANDOVER.md` for the maintained operational truth.
 
 ## 2. Constraints, in priority order
 

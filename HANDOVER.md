@@ -10,14 +10,16 @@ lapses.
 
 ## 1. The 60-second version
 
-Abhyas is a **plain static website**. HTML, CSS and JavaScript, no build step,
-no database, no server code. You can open `index.html` in a browser and it
-works.
+Abhyas is a **static-first website with a small PHP/JSON backend**. HTML, CSS
+and JavaScript still have no build step, while PHP handles public submission,
+quarantine, moderation and authenticated publishing. Production data is read
+through `api/data.php`; serve the project over HTTP for a representative local
+preview.
 
-That is deliberate, and it is the main thing protecting the project: if the
-hosting ever disappears, the whole site can be put back up anywhere — another
-host, GitHub Pages, Netlify — by copying the files. There is nothing to
-install and nothing to migrate.
+That is deliberate, and it keeps recovery simple: the public frontend can be
+served by any static host, while full submission/moderation recovery requires a
+PHP host plus the server-only config, JSON and uploaded-file backups described
+below. There is no database migration.
 
 | Page | File |
 |---|---|
@@ -29,8 +31,8 @@ install and nothing to migrate.
 | Terms | `terms.html` |
 | One resource's own page | `resource.html?id=N` |
 
-All styling is in **one** file, `styles.css`. All resource data is in
-`data.js`.
+All styling is in **one** file, `styles.css`. `data.js` contains configuration;
+resource/contributor records are JSON served through the data API.
 
 **Cache-busting is manual.** Every `<link>` and `<script>` tag carries a
 `?v=N`. If you edit a file and the change does not appear in the browser,
@@ -50,7 +52,7 @@ going to an inbox nobody reads any more.
 | Web hosting | Hostinger | | | |
 | Code repository | GitHub | `chandanmettu` | n/a | |
 | Vote counter API | Google Apps Script | | n/a | |
-| PDF viewer credential | Adobe | *not yet set up* | | |
+| PDF viewer | Self-hosted PDF.js | n/a | n/a | repository |
 
 ---
 
@@ -146,43 +148,42 @@ folder instead:
 python3 -m http.server 8000
 ```
 
-Re-hosting anywhere (another host, Netlify, GitHub Pages) works normally —
-any web server is fine, this only affects opening files directly.
+The read-only frontend can be re-hosted on any web server. Public submissions
+and admin moderation additionally require PHP and the private directories.
 
-**Still placeholder:** the 24 resources and 8 contributors are invented, and
-there are no real PDFs yet. Delete both files' contents when real files start
-arriving — the leaderboard currently ranks people who do not exist.
+**Production is populated.** On 2026-09-05 the live API exposed 864 resources
+and 20 contributors. The tracked JSON is a development snapshot; mutable live
+JSON and uploaded files are server-managed and can move ahead of Git.
 
 ---
 
 ## 5a. The backend
 
-One PHP endpoint. Everything else is static. This is the **admin-only
-publishing** shape — see `BACKEND-PLAN-v3.md` for why it's smaller than a
-public-submission backend would need to be, and `AGENT-PLANS.md` for how
-that got decided (seven AI models, independently, same conclusion).
+The PHP layer now covers both authenticated publishing and public submissions.
+`docs/history/BACKEND-PLAN-v3.md` records the earlier admin-only phase; its Phase 4 section
+documents the additive quarantine/moderation build.
 
 | Path | Job |
 |---|---|
-| `api/publish.php` | authenticated: publish, edit, delete a resource |
-| `api/hash.php` | generates a password hash. **Delete after use.** |
+| `api/data.php` | exposes the approved public JSON safely |
+| `api/submit.php` | validates and writes public submissions to quarantine |
+| `api/publish.php` | authenticated publish, review, approve/reject, edit and delete actions |
 | `api/config.sample.php` | template — copy it OUTSIDE `public_html` |
 | `admin/` | the console — publish form + manage list |
 
-The old public-submission design (`submit.php`, a quarantine folder, a
-moderation queue) is archived, not deleted, at
-`_local/_archive/phase4-deferred-api/` — it comes back if/when public
-submissions actually launch. See `BACKEND-PLAN-v3.md` §6.
+Public submission, quarantine and the moderation queue are deployed. Pending
+files live outside the web root and are streamed only through authenticated
+review actions. See `docs/history/BACKEND-PLAN-v3.md` §6.
 
 ### Setup, once
 
-1. Create `abhyas-private/` **above** `public_html`. (No `abhyas-pending/`
-   in this phase — there's nothing to quarantine.)
+1. Create both `abhyas-private/` and `abhyas-pending/` **above** `public_html`.
 2. Copy `api/config.sample.php` to `abhyas-private/config.php` and edit paths.
 3. Open `api/hash.php`, generate a password hash, paste it into the config,
    then **delete `api/hash.php`**.
 4. Uncomment the Basic Auth lines in `admin/.htaccess`.
-5. In `admin/admin.js`, set `USE_MOCK = false`.
+5. Verify `api/data.php`, public submission, pending preview, approval,
+   rejection, editing and logout before opening the workflow to contributors.
 
 ### Two rules that are not optional
 
@@ -197,9 +198,9 @@ submissions actually launch. See `BACKEND-PLAN-v3.md` §6.
 
 ### Status
 
-The console UI is built and works against a mock (password `demo`). **The PHP
-has never been executed** — it was written without a PHP runtime available.
-Test every endpoint on a staging copy before pointing the live site at it.
+The PHP backend and console are live. The application-level login, session,
+throttling and CSRF checks are active. The outer Basic Auth lines in
+`admin/.htaccess` are still commented and remain the main hardening item.
 
 ---
 
@@ -219,10 +220,11 @@ Test every endpoint on a staging copy before pointing the live site at it.
 ## 7. Putting the site back up from nothing
 
 1. Get the files (repository, or a backup copy).
-2. Upload them to any web host, or drop them on GitHub Pages / Netlify.
+2. Upload the frontend to a web host; use a PHP-capable host for the full
+   submission/admin service.
 3. Point the domain at it.
 4. Re-upload `/files/` from the backup in §4.
 
-There is no database to restore and no server to configure. That is the whole
-advantage of the way this is built — protect it by not adding one unless
-something genuinely requires it.
+There is no database, but there is server state to restore: private config,
+mutable JSON, approved uploads, pending/rejected submissions and backups. Keep
+an off-host copy of the uploaded files; Git alone cannot recreate the service.
