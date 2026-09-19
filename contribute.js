@@ -24,7 +24,6 @@
     { id: "papers",     title: "Quizzes &amp; Past Papers", tint: "--papers-tint",     ink: "--papers-ink",     k: "--papers",     glow: "rgba(242,135,0,.25)" },
     { id: "notes",      title: "Notes &amp; Slides",        tint: "--notes-tint",      ink: "--notes-ink",      k: "--notes",      glow: "rgba(105,139,57,.25)" },
     { id: "assignment", title: "Assignments &amp; Labs",    tint: "--assignment-tint", ink: "--assignment-ink", k: "--assignment", glow: "rgba(208,71,36,.25)" },
-    { id: "reference",  title: "Reference Books",           tint: "--reference-tint",  ink: "--reference-ink",  k: "--reference",  glow: "rgba(140,101,151,.25)" },
   ];
 
   let stagedFiles = [];
@@ -39,19 +38,24 @@
     const host = document.getElementById("cgKindSelector");
     if (!host) return;
     host.innerHTML = KIND_META.map((m) => `
-      <div class="cg-kind-opt${m.id === currentKind ? " on" : ""}" data-kind="${m.id}"
+      <button type="button" class="cg-kind-opt${m.id === currentKind ? " on" : ""}" data-kind="${m.id}"
+           aria-pressed="${m.id === currentKind}"
            style="--opt-k:var(${m.k});--opt-tint:var(${m.tint});--opt-ink:var(${m.ink});--opt-k-glow:${m.glow}">
         <div class="cg-kind-opt-head">
           <span class="cg-kind-opt-dot"></span>
           <span class="cg-kind-opt-pts">+${(typeof POINTS !== "undefined" && POINTS[m.id]) || 0} pts</span>
         </div>
         <span class="cg-kind-opt-title">${m.title}</span>
-      </div>`).join("");
+      </button>`).join("");
 
     host.querySelectorAll(".cg-kind-opt").forEach((opt) => {
       opt.addEventListener("click", () => {
-        host.querySelectorAll(".cg-kind-opt").forEach((o) => o.classList.remove("on"));
+        host.querySelectorAll(".cg-kind-opt").forEach((o) => {
+          o.classList.remove("on");
+          o.setAttribute("aria-pressed", "false");
+        });
         opt.classList.add("on");
+        opt.setAttribute("aria-pressed", "true");
         currentKind = opt.dataset.kind;
         paintDropzone();
       });
@@ -59,8 +63,8 @@
     paintDropzone();
   }
 
-  /* The drop area answers the kind you picked. Same four families as the
-     folders on Archive, so the colour is learned by using it. */
+  /* The drop area answers the kind you picked. Reference books are suggested
+     by email because the review queue accepts PDFs, not book records. */
   function paintDropzone() {
     const split = document.querySelector(".cg-intake-split");
     const m = KIND_META.find((x) => x.id === currentKind);
@@ -76,10 +80,8 @@
     if (typeof DEPARTMENTS === "undefined") return;
     const opts = '<option value="">Select your department / branch…</option>' +
       DEPARTMENTS.map((d) => `<option value="${d.code}">${esc(d.name)}</option>`).join("");
-    ["cgDept", "cgLinkDept"].forEach((id) => {
-      const el = document.getElementById(id);
-      if (el) el.innerHTML = opts;
-    });
+    const el = document.getElementById("cgDept");
+    if (el) el.innerHTML = opts;
   }
 
   /* Typing a known code fills the course name, so the same course does not
@@ -104,7 +106,7 @@
     const semYear = document.getElementById("cgSemesterYear");
     const hint = document.getElementById("cgCodeHint");
     if (!code) return;
-    code.addEventListener("input", () => {
+    const syncCode = () => {
       const key = code.value.trim().toUpperCase();
       const hit = COURSES[key];
       if (!hit) { if (hint) hint.hidden = true; return; }
@@ -122,7 +124,9 @@
         hint.innerHTML = `Known course &mdash; <b>${esc(hit.name)}</b>${semStr}${profStr}`;
         hint.hidden = false;
       }
-    });
+    };
+    code.addEventListener("input", syncCode);
+    syncCode();
   }
 
   /* ============================================================
@@ -135,6 +139,12 @@
     if (!dz || !input) return;
 
     dz.addEventListener("click", () => input.click());
+    dz.addEventListener("keydown", (ev) => {
+      if (ev.key === "Enter" || ev.key === " ") {
+        ev.preventDefault();
+        input.click();
+      }
+    });
     ["dragenter", "dragover"].forEach((e) =>
       dz.addEventListener(e, (ev) => { ev.preventDefault(); dz.classList.add("drag-over"); }));
     ["dragleave", "drop"].forEach((e) =>
@@ -146,13 +156,14 @@
     /* Rejected here AND on the server. This check is for the person's
        benefit — a clear message now beats a confusing failure later. */
     function add(files) {
-      files.forEach((f) => {
-        const ext = (f.name.split(".").pop() || "").toLowerCase();
-        if (!OK_TYPES.includes(ext)) return toast(`${f.name} isn’t a PDF. Combine photos into one PDF first, then add it here.`);
-        if (f.size > MAX_BYTES) return toast(`${f.name} is over 25 MB.`);
-        if (stagedFiles.some((s) => s.name === f.name && s.size === f.size)) return;
-        stagedFiles.push(f);
-      });
+      if (files.length > 1) return toast("Choose one PDF at a time. You can send another after 60 seconds.");
+      const f = files[0];
+      if (!f) return;
+      const ext = (f.name.split(".").pop() || "").toLowerCase();
+      if (!OK_TYPES.includes(ext)) return toast(`${f.name} isn’t a PDF. Combine photos into one PDF first, then add it here.`);
+      if (!f.size) return toast(`${f.name} is empty.`);
+      if (f.size > MAX_BYTES) return toast(`${f.name} is over 25 MB.`);
+      stagedFiles = [f];
       render();
     }
 
@@ -263,23 +274,22 @@
 
     btn.addEventListener("click", async () => {
       const code = (document.getElementById("cgCourseCode").value || "").trim().toUpperCase();
+      const dept = document.getElementById("cgDept")?.value || "";
 
-      if (!stagedFiles.length) return toast("Add at least one file first.");
+      if (!stagedFiles.length) return toast("Add a PDF first.");
       if (!code) return toast("A course code is needed — it is how everything here is filed.");
+      if (!dept) return toast("Select the department or branch this file belongs to.");
 
       btn.disabled = true;
       const label = btn.innerHTML;
       btn.textContent = "Sending…";
 
       const semYearVal = (document.getElementById("cgSemesterYear")?.value || "").trim();
-      const parsedYear = parseInt(semYearVal.replace(/\D/g, ""), 10) || new Date().getFullYear();
-      const hit = COURSES[code];
-      const dept = (hit && hit.branches && hit.branches[0]) || "";
+      const parsedYear = semYearVal.match(/\b(?:19|20)\d{2}\b/)?.[0] || "";
 
-      let sent = 0, failed = 0, threw = 0, lastError = "", reference = "";
-      for (const file of stagedFiles) {
+      try {
         const fd = new FormData();
-        fd.append("file", file);
+        fd.append("file", stagedFiles[0]);
         fd.append("code", code);
         fd.append("department", dept);
         fd.append("course", (document.getElementById("cgCourseName")?.value || "").trim());
@@ -287,41 +297,40 @@
         fd.append("semester", semYearVal);
         fd.append("type", currentKind);
         fd.append("examType", (document.getElementById("cgExamType")?.value || "").trim());
-        fd.append("year", parsedYear);
+        if (parsedYear) fd.append("year", parsedYear);
         if (creditOn) {
           fd.append("contributor", (document.getElementById("cgContribName")?.value || "").trim());
           fd.append("roll", (document.getElementById("cgContribRoll")?.value || "").trim().toUpperCase());
         }
-        try {
-          const res = await fetch(SUBMIT_ENDPOINT, { method: "POST", body: fd });
-          const data = await res.json().catch(() => ({}));
-          if (res.ok && data.ok) { sent++; reference = data.reference || reference; }
-          else { failed++; lastError = data.error || `That file couldn’t be accepted (error ${res.status}).`; }
-        } catch {
-          threw++;
+        const res = await fetch(SUBMIT_ENDPOINT, { method: "POST", body: fd });
+        const data = await res.json().catch(() => ({}));
+        if (res.ok && data.ok) {
+          stagedFiles = [];
+          initDropzone.render?.();
+          toast(`Held for review${data.reference ? ` · ref ${data.reference}` : ""}. Nothing goes live until it is checked.`);
+        } else {
+          toast(data.error || `That file couldn’t be accepted (error ${res.status}).`);
         }
-      }
-
-      btn.disabled = false;
-      btn.innerHTML = label;
-
-      if (sent) {
-        stagedFiles = [];
-        initDropzone.render?.();
-        toast(`Held for review${reference ? ` · ref ${reference}` : ""}. Nothing goes live until it is checked.`);
-      } else if (failed) {
-        // Surface the server's actual reason (wrong type, too large, queue
-        // full, cooldown) rather than a generic "service is down".
-        toast(lastError || "That file couldn’t be accepted.");
-      } else if (threw) {
+      } catch {
         toast("Couldn’t reach the archive — check your connection and try again.");
+      } finally {
+        btn.disabled = false;
+        btn.innerHTML = label;
       }
     });
 
     document.getElementById("cgLinkSubmitBtn")?.addEventListener("click", () => {
       const url = (document.getElementById("cgLinkUrl").value || "").trim();
       if (!url) return toast("Paste the folder link first.");
-      toast("Thanks — we’ll fetch the folder by hand and file what’s in it.");
+      try {
+        if (new URL(url).protocol !== "https:") throw new Error("Invalid link");
+      } catch {
+        return toast("Enter a valid https:// folder link.");
+      }
+      const semester = (document.getElementById("cgLinkSemester")?.value || "").trim();
+      const notes = (document.getElementById("cgLinkNotes")?.value || "").trim();
+      const body = `Folder link: ${url}\nSemester / year: ${semester || "Not provided"}\nCourses / instructors / notes: ${notes || "Not provided"}\n\nPlease check that anyone with the link can view the folder.`;
+      window.location.href = `mailto:ms24btech11021@iith.ac.in?subject=${encodeURIComponent("Abhyas cloud folder contribution")}&body=${encodeURIComponent(body)}`;
     });
   }
 

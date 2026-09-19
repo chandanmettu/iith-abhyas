@@ -40,7 +40,12 @@ if (count($queued) >= $c['max_pending']) {
   fail(503, 'The review queue is full right now. Please try again later.');
 }
 
-if (empty($_FILES['file']) || $_FILES['file']['error'] !== UPLOAD_ERR_OK) fail(400, 'No file received.');
+if (($_POST['type'] ?? '') === 'reference') fail(400, 'Reference books cannot be submitted as PDFs. Please use the email option.');
+if (empty($_FILES['file'])) fail(400, 'No file received.');
+if (in_array($_FILES['file']['error'], [UPLOAD_ERR_INI_SIZE, UPLOAD_ERR_FORM_SIZE], true)) {
+  fail(413, 'That file is too large for the server.');
+}
+if ($_FILES['file']['error'] !== UPLOAD_ERR_OK) fail(400, 'No file received.');
 $f = $_FILES['file'];
 if ($f['size'] <= 0 || $f['size'] > $c['max_upload_bytes']) fail(413, 'That file is too large.');
 if (!is_uploaded_file($f['tmp_name']) || !looks_like_pdf($f['tmp_name'])) fail(415, 'Only PDF files can be accepted.');
@@ -102,7 +107,12 @@ if ($record['duplicateOf'] === null) {
   }
 }
 
-file_put_contents($pending . '/' . $id . '.json', json_encode($record, JSON_PRETTY_PRINT));
+$json = json_encode($record, JSON_PRETTY_PRINT);
+if ($json === false || file_put_contents($pending . '/' . $id . '.json', $json) === false) {
+  @unlink($pending . '/' . $id . '.json');
+  @unlink($pending . '/' . $id . '.pdf');
+  fail(500, 'Could not store the submission. Please try again.');
+}
 @chmod($pending . '/' . $id . '.json', 0600);
 
 $_SESSION['last_submit'] = $now;
