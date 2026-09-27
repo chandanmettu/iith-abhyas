@@ -215,7 +215,7 @@
       .sort((a, b) => String(a[1].name || "").localeCompare(String(b[1].name || "")));
 
     if (!rows.length) {
-      host.innerHTML = `<div class="ad-empty"><b>${Object.keys(state.contributors).length ? "No matches" : "Nobody credited yet"}</b><span>${Object.keys(state.contributors).length ? "Try a different search." : "Contributors appear here once a resource credits one."}</span></div>`;
+      host.innerHTML = `<div class="ab-empty"><b>${Object.keys(state.contributors).length ? "No matches" : "Nobody credited yet"}</b><span>${Object.keys(state.contributors).length ? "Try a different search." : "Contributors appear here once a resource credits one."}</span></div>`;
       return;
     }
 
@@ -240,38 +240,38 @@
       const others = rows.filter(([oid]) => oid !== id);
       const open = state.peopleOpen === id;
       return `
-      <div class="ad-card ad-person${open ? " is-open" : ""}">
-        <div class="ad-fileicon">${esc(initialsOf(p.name))}</div>
-        <div class="ad-cardmain">
-          <p class="ad-cardtitle">${esc(p.name || id)}</p>
-          <div class="ad-cardmeta">
+      <div class="ab-card ab-person${open ? " is-open" : ""}">
+        <div class="ab-fileicon">${esc(initialsOf(p.name))}</div>
+        <div class="ab-cardmain">
+          <p class="ab-cardtitle">${esc(p.name || id)}</p>
+          <div class="ab-cardmeta">
             <span>${esc(p.roll || "no roll on record")}</span>
-            ${n ? `<button class="ad-linkbtn" type="button" data-person-open="${esc(id)}">${n} resource${n === 1 ? "" : "s"}${open ? " ▲" : " ▾"}</button>`
+            ${n ? `<button class="ab-linkbtn" type="button" data-person-open="${esc(id)}">${n} resource${n === 1 ? "" : "s"}${open ? " ▲" : " ▾"}</button>`
                 : `<span>0 resources</span>`}
-            ${!p.roll || batchOf(p.roll) === p.roll ? `<span class="ad-newtag">roll incomplete</span>` : ""}
+            ${!p.roll || batchOf(p.roll) === p.roll ? `<span class="ab-newtag">roll incomplete</span>` : ""}
           </div>
           ${open ? `
-          <div class="ad-person-detail">
-            <ul class="ad-person-resources">
+          <div class="ab-person-detail">
+            <ul class="ab-person-resources">
               ${mine.map((r) => `<li><b>${esc(r.course || r.title || r.code || "Untitled")}</b>
                 <span>${esc(r.code || "")}${r.year ? " · " + esc(String(r.year)) : ""} · ${esc(labelOf(r.type))}</span></li>`).join("") || `<li><span>No published resources.</span></li>`}
             </ul>
             ${others.length ? `
-            <div class="ad-person-merge">
+            <div class="ab-person-merge">
               <label>Merge <b>${esc(p.name || id)}</b> into
                 <select data-merge-target="${esc(id)}">
                   <option value="">choose contributor…</option>
                   ${others.map(([oid, op]) => `<option value="${esc(oid)}">${esc(op.name || oid)}${op.roll ? " (" + esc(op.roll) + ")" : ""}</option>`).join("")}
                 </select>
               </label>
-              <button class="ad-edit-btn" type="button" data-merge-do="${esc(id)}">Merge</button>
-              <p class="ad-hint">This entry is removed; its ${n} resource${n === 1 ? "" : "s"} move to the chosen contributor.</p>
+              <button class="ab-edit-btn" type="button" data-merge-do="${esc(id)}">Merge</button>
+              <p class="ab-hint">This entry is removed; its ${n} resource${n === 1 ? "" : "s"} move to the chosen contributor.</p>
             </div>` : ""}
           </div>` : ""}
         </div>
-        <div class="ad-card-actions">
-          <button class="ad-edit-btn" type="button" data-person="${esc(id)}">Edit</button>
-          ${n === 0 ? `<button class="ad-delete-btn" type="button" data-person-del="${esc(id)}">Delete</button>` : ""}
+        <div class="ab-card-actions">
+          <button class="ab-edit-btn" type="button" data-person="${esc(id)}">Edit</button>
+          ${n === 0 ? `<button class="ab-delete-btn" type="button" data-person-del="${esc(id)}">Delete</button>` : ""}
         </div>
       </div>`;
     }).join("");
@@ -370,7 +370,7 @@
         ? "Submissions from the Contribute page will show up here."
         : onTrash ? "Deleted resources sit here for 14 days before they're gone for good."
         : "Click “Add resource” to publish the first file.");
-      host.innerHTML = `<div class="ad-empty"><b>${source.length ? "No matches" : empty}</b><span>${sub}</span></div>`;
+      host.innerHTML = `<div class="ab-empty"><b>${source.length ? "No matches" : empty}</b><span>${sub}</span></div>`;
       return;
     }
 
@@ -378,25 +378,25 @@
       host.innerHTML = rows.map((it) => {
         const isNewCourse = it.code && !COURSE_CATALOG[it.code.toUpperCase()];
         return `
-        <div class="ad-card k-${esc(it.type)}">
-          <div class="ad-fileicon">PDF</div>
-          <div class="ad-cardmain">
-            <p class="ad-cardtitle">${esc(it.course || it.filename || "Untitled")}</p>
-            <div class="ad-cardmeta">
-              <span class="ad-kind">${esc(labelOf(it.type))}</span>
+        <div class="ab-card k-${esc(it.type)}">
+          <div class="ab-fileicon">PDF</div>
+          <div class="ab-cardmain">
+            <p class="ab-cardtitle">${esc(it.course || it.filename || "Untitled")}</p>
+            <div class="ab-cardmeta">
+              <span class="ab-kind">${esc(labelOf(it.type))}</span>
               <span>${esc(it.code || "no code")}</span>
               <span>${esc(it.contributor || "no credit given")}</span>
               <span>${esc(it.sizeLabel || "")}</span>
-              ${isNewCourse ? `<span class="ad-newtag">New course</span>` : ""}
-              ${it.duplicateOf ? `<span class="ad-dupe">possible duplicate</span>` : ""}
+              ${isNewCourse ? `<span class="ab-newtag">New course</span>` : ""}
+              ${it.duplicateOf ? `<span class="ab-dupe">possible duplicate</span>` : ""}
             </div>
           </div>
-          <div class="ad-card-actions">
-            <button class="ad-review-btn" type="button" data-id="${esc(it.id)}">Review</button>
+          <div class="ab-card-actions">
+            <button class="ab-review-btn" type="button" data-id="${esc(it.id)}">Review</button>
           </div>
         </div>`;
       }).join("");
-      host.querySelectorAll(".ad-review-btn").forEach((b) => {
+      host.querySelectorAll(".ab-review-btn").forEach((b) => {
         b.addEventListener("click", () => openReview(b.dataset.id));
       });
       return;
@@ -404,57 +404,57 @@
 
     if (onTrash) {
       host.innerHTML = rows.map((it) => `
-        <div class="ad-card k-${esc(it.type)}">
-          <div class="ad-fileicon">PDF</div>
-          <div class="ad-cardmain">
-            <p class="ad-cardtitle">${esc(it.title || it.course || "Untitled")}</p>
-            <div class="ad-cardmeta">
-              <span class="ad-kind">${esc(labelOf(it.type))}</span>
+        <div class="ab-card k-${esc(it.type)}">
+          <div class="ab-fileicon">PDF</div>
+          <div class="ab-cardmain">
+            <p class="ab-cardtitle">${esc(it.title || it.course || "Untitled")}</p>
+            <div class="ab-cardmeta">
+              <span class="ab-kind">${esc(labelOf(it.type))}</span>
               <span>${esc(it.code || "no code")}</span>
               <span>${esc(contributorName(it.contributor))}</span>
               <span>${esc(daysLeft(it.deletedAt))} left</span>
             </div>
           </div>
-          <div class="ad-card-actions">
-            <button class="ad-review-btn" type="button" data-id="${esc(it.id)}">Restore</button>
+          <div class="ab-card-actions">
+            <button class="ab-review-btn" type="button" data-id="${esc(it.id)}">Restore</button>
           </div>
         </div>`).join("");
-      host.querySelectorAll(".ad-review-btn").forEach((b) => {
+      host.querySelectorAll(".ab-review-btn").forEach((b) => {
         b.addEventListener("click", () => doRestore(b.dataset.id));
       });
       return;
     }
 
     host.innerHTML = rows.map((it) => `
-      <div class="ad-card k-${esc(it.type)}">
-        <div class="ad-fileicon">PDF</div>
-        <div class="ad-cardmain">
-          <p class="ad-cardtitle">${esc(it.title || it.course || "Untitled")}</p>
-          <div class="ad-cardmeta">
-            <span class="ad-kind">${esc(labelOf(it.type))}</span>
+      <div class="ab-card k-${esc(it.type)}">
+        <div class="ab-fileicon">PDF</div>
+        <div class="ab-cardmain">
+          <p class="ab-cardtitle">${esc(it.title || it.course || "Untitled")}</p>
+          <div class="ab-cardmeta">
+            <span class="ab-kind">${esc(labelOf(it.type))}</span>
             <span>${esc(it.code || "no code")}</span>
             <span>${esc(contributorName(it.contributor))}</span>
             <span>${esc(it.added || "")}</span>
           </div>
         </div>
-        <div class="ad-card-actions">
-          <button class="ad-edit-btn" type="button" data-id="${esc(it.id)}">Edit</button>
-          <button class="ad-delete-btn" type="button" data-id="${esc(it.id)}">Delete</button>
+        <div class="ab-card-actions">
+          <button class="ab-edit-btn" type="button" data-id="${esc(it.id)}">Edit</button>
+          <button class="ab-delete-btn" type="button" data-id="${esc(it.id)}">Delete</button>
         </div>
       </div>`).join("");
 
-    host.querySelectorAll(".ad-edit-btn").forEach((b) => {
+    host.querySelectorAll(".ab-edit-btn").forEach((b) => {
       b.addEventListener("click", () => openEdit(b.dataset.id));
     });
-    host.querySelectorAll(".ad-delete-btn").forEach((b) => {
+    host.querySelectorAll(".ab-delete-btn").forEach((b) => {
       b.addEventListener("click", () => doDelete(b.dataset.id));
     });
   }
 
-  document.querySelectorAll("#tabs .ad-tab").forEach((tab) => {
+  document.querySelectorAll("#tabs .ab-tab").forEach((tab) => {
     tab.addEventListener("click", () => {
       state.tab = tab.dataset.tab;
-      document.querySelectorAll("#tabs .ad-tab").forEach((t) => t.classList.toggle("on", t === tab));
+      document.querySelectorAll("#tabs .ab-tab").forEach((t) => t.classList.toggle("on", t === tab));
       renderList();
     });
   });
@@ -623,11 +623,11 @@
     const fileUrl = it.file ? new URL(`../api/file.php?path=${encodeURIComponent(it.file)}`, window.location.href).href : null;
     if (coverPath) {
       const src = new URL(`../api/file.php?path=${encodeURIComponent(coverPath)}`, window.location.href).href;
-      pane.innerHTML = `<div class="ad-cover-preview"><img src="${src}" alt="Cover"></div>`;
+      pane.innerHTML = `<div class="ab-cover-preview"><img src="${src}" alt="Cover"></div>`;
     } else {
       pane.innerHTML = fileUrl
         ? `<iframe src="../assets/pdfjs/web/viewer.html?file=${encodeURIComponent(fileUrl)}" title="Preview"></iframe>`
-        : `<div class="ad-pdf-stub">No file on record for this entry.</div>`;
+        : `<div class="ab-pdf-stub">No file on record for this entry.</div>`;
     }
 
     openPanel();
@@ -715,7 +715,7 @@
     // A reference book's file is its cover image — show the picture, not
     // the PDF viewer. Everything else is still a PDF.
     pane.innerHTML = document.getElementById("fType").value === "reference"
-      ? `<div class="ad-cover-preview"><img src="${previewUrl}" alt="Cover preview"></div>`
+      ? `<div class="ab-cover-preview"><img src="${previewUrl}" alt="Cover preview"></div>`
       : `<iframe src="../assets/pdfjs/web/viewer.html?file=${encodeURIComponent(previewUrl)}" title="Preview"></iframe>`;
   });
 
@@ -752,7 +752,7 @@
   function previewStub() {
     const isBook = document.getElementById("fType").value === "reference";
     document.getElementById("pdfPane").innerHTML =
-      `<div class="ad-pdf-stub">${isBook
+      `<div class="ab-pdf-stub">${isBook
         ? "Pick the book's cover image to preview it here"
         : "Pick a PDF to preview it here"} &mdash; nothing uploads until you click Publish.</div>`;
   }
