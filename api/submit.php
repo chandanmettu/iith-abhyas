@@ -79,7 +79,9 @@ $record = [
   // different semester for different branches, so it was never a fact
   // about the course to store.
   'semesterHint'=> $field('semester', 50),
-  'year'        => (int) ($_POST['year'] ?? 0) ?: null,
+  // Keep malformed year hints for the admin in semesterHint, but never
+  // turn them into a five-digit academic session in the review dropdown.
+  'year'        => academic_start_year($_POST['year'] ?? null),
   'examType'    => $field('examType', 100),
   'professor'   => $field('professor'),
   'contributor' => $field('contributor', 80),

@@ -182,3 +182,12 @@ function human_size(int $b): string {
   if ($b >= 1024) return round($b / 1024) . ' KB';
   return $b . ' B';
 }
+
+/** An academic session is stored by its four-digit starting year. */
+function academic_start_year($value): ?int {
+  if (!is_scalar($value)) return null;
+  $raw = trim((string) $value);
+  if (!preg_match('/^(?:19|20)\d{2}$/', $raw)) return null;
+  $year = (int) $raw;
+  return $year <= (int) date('Y') + 1 ? $year : null;
+}

@@ -448,7 +448,11 @@ if ($action === 'edit') {
   }
   unset($all[$idx]['roll']); // the batch belongs to the contributor registry, not the resource
   $all[$idx]['department'] = strtoupper(preg_replace('/[^A-Za-z]/', '', (string) ($all[$idx]['department'] ?? '')));
-  if (isset($body['year'])) $all[$idx]['year'] = (int) $body['year'] ?: null;
+  if (array_key_exists('year', $body)) {
+    $year = academic_start_year($body['year']);
+    if ($year === null) fail(400, 'Choose a valid academic year.');
+    $all[$idx]['year'] = $year;
+  }
   // Lets a wrong `added` be corrected after the fact -- e.g. a resource
   // that's genuinely from years ago (an old migration, a late-filed
   // paper) but got published today, which would otherwise count it
@@ -586,7 +590,8 @@ function parsed_fields(array $body): array {
   // one book from another).
   $examFallback = $type === 'reference' ? slugify((string) ($body['bookTitle'] ?? '')) : '';
   $exam = slugify((string) ($body['examType'] ?? '')) ?: ($examFallback ?: slugify($type));
-  $year = (int) ($body['year'] ?? 0) ?: (int) date('Y');
+  $year = academic_start_year($body['year'] ?? null);
+  if ($year === null) fail(400, 'Choose a valid academic year.');
 
   return compact('code', 'dept', 'course', 'type', 'exam', 'year');
 }

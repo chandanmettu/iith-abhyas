@@ -107,3 +107,7 @@ If the admin counts load but the tabs or resource cards disappear, inspect
 browser cosmetic filtering before changing server data. The old `ad-top`,
 `ad-tabs` and `ad-card` CSS classes matched generic EasyList hiding rules;
 the console now uses `ab-` classes so a browser blocker can stay enabled.
+
+If a pending submission carries an invalid or missing academic year, Review
+shows **Choose academic year**. Check the student's semester/year hint and the
+PDF before choosing; the stored hint is not proof of the correct session.
