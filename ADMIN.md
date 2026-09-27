@@ -111,3 +111,6 @@ the console now uses `ab-` classes so a browser blocker can stay enabled.
 If a pending submission carries an invalid or missing academic year, Review
 shows **Choose academic year**. Check the student's semester/year hint and the
 PDF before choosing; the stored hint is not proof of the correct session.
+The contribution form does not guess the year from the upload date or course
+code. Its optional year is the four-digit start of the academic session; for
+example, a January 2026 paper belongs to 2025–26 unless the PDF says otherwise.

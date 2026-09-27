@@ -103,7 +103,6 @@
     const code = document.getElementById("cgCourseCode");
     const name = document.getElementById("cgCourseName");
     const prof = document.getElementById("cgProfessor");
-    const semYear = document.getElementById("cgSemesterYear");
     const hint = document.getElementById("cgCodeHint");
     if (!code) return;
     const syncCode = () => {
@@ -114,9 +113,6 @@
       if (name && !name.value.trim()) name.value = hit.name || "";
       if (prof && !prof.value.trim() && Array.isArray(hit.professors) && hit.professors.length > 0) {
         prof.value = hit.professors.join(", ");
-      }
-      if (semYear && !semYear.value.trim() && hit.sem) {
-        semYear.value = `Sem ${hit.sem} ${new Date().getFullYear()}`;
       }
       if (hint) {
         const semStr = hit.sem ? ` &middot; Sem ${hit.sem}` : "";

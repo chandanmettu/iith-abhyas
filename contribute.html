@@ -308,18 +308,9 @@
             </div>
 
             <div class="cg-field">
-              <label class="cg-label" for="cgSemesterYear">Semester &amp; Year <span class="cg-label-hint">(Optional)</span></label>
-              <input class="cg-input" id="cgSemesterYear" type="text" list="cgSemList" placeholder="e.g. Sem 1 2024, Sem 3 2025" autocomplete="off">
-              <datalist id="cgSemList">
-                <option value="Sem 1 2025">
-                <option value="Sem 2 2025">
-                <option value="Sem 3 2025">
-                <option value="Sem 4 2025">
-                <option value="Sem 1 2024">
-                <option value="Sem 2 2024">
-                <option value="Sem 3 2024">
-                <option value="Sem 4 2024">
-              </datalist>
+              <label class="cg-label" for="cgSemesterYear">Semester &amp; Academic Year <span class="cg-label-hint">(Optional)</span></label>
+              <input class="cg-input" id="cgSemesterYear" type="text" placeholder="e.g. Sem 2 · 2025–26" autocomplete="off" aria-describedby="cgYearHelp">
+              <span class="cg-label-hint" id="cgYearHelp">Use the year the academic session started. For Jan–May 2026, enter 2025–26. If unsure, leave the year blank; we will check the PDF.</span>
             </div>
 
             <div class="cg-field cg-field-full">
@@ -487,7 +478,7 @@
                 <span class="ctr-rule-mark">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
                 </span>
-                <span class="ctr-rule-text"><b>Semester &amp; year.</b> e.g. Sem 1 2024, Sem 3 2025.</span>
+                <span class="ctr-rule-text"><b>Semester &amp; academic year.</b> e.g. Sem 2 · 2025–26. Leave the year blank if unsure.</span>
               </li>
               <li class="ctr-rule-row">
                 <span class="ctr-rule-mark">
@@ -745,6 +736,6 @@
 <script src="lenis.min.js"></script>
 <script src="smooth.js?v=10"></script>
 <script src="data.js?v=14"></script>
-<script src="contribute.js?v=13"></script>
+<script src="contribute.js?v=14"></script>
 </body>
 </html>
