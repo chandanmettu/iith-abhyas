@@ -19,173 +19,173 @@ body { background: #EADCC2; }
 /* `display:` on a class beats the hidden attribute — this bit us once */
 [hidden] { display: none !important; }
 
-.ad-shell { max-width: 1180px; margin: 0 auto; padding: 22px 24px 80px; }
+.ab-shell { max-width: 1180px; margin: 0 auto; padding: 22px 24px 80px; }
 
 /* ---------------- top bar ---------------- */
-.ad-top {
+.ab-top {
   display: flex; align-items: center; justify-content: space-between;
   gap: 16px; flex-wrap: wrap;
   padding: 14px 22px; margin-bottom: 34px;
   background: var(--surface); border: 1px solid var(--hair);
   border-radius: 999px;
 }
-.ad-brand { display: flex; align-items: center; gap: 11px; }
-.ad-brand b {
+.ab-brand { display: flex; align-items: center; gap: 11px; }
+.ab-brand b {
   font-family: var(--font-display); font-weight: 800; font-size: 1.16rem;
   letter-spacing: var(--track-md); color: var(--ink);
 }
-.ad-brand span {
+.ab-brand span {
   font: 400 .7rem var(--font-mono); color: var(--muted);
   letter-spacing: .1em; text-transform: uppercase;
   border-left: 1px solid var(--hair); padding-left: 12px;
 }
-.ad-topright { display: flex; align-items: center; gap: 12px; }
-.ad-who { font: 400 .78rem var(--font-mono); color: var(--muted); }
-.ad-logout {
+.ab-topright { display: flex; align-items: center; gap: 12px; }
+.ab-who { font: 400 .78rem var(--font-mono); color: var(--muted); }
+.ab-logout {
   border: 1px solid var(--hair); background: var(--paper); cursor: pointer;
   color: var(--ink-soft); font: 500 .74rem var(--font-mono);
   padding: 9px 16px; border-radius: 999px;
   transition: background .25s var(--ease), color .25s var(--ease);
 }
-.ad-logout:hover { background: var(--wash); color: var(--ink); }
+.ab-logout:hover { background: var(--wash); color: var(--ink); }
 
 /* ---------------- hero ---------------- */
-.ad-hero { text-align: center; padding: 12px 0 34px; }
-.ad-kicker {
+.ab-hero { text-align: center; padding: 12px 0 34px; }
+.ab-kicker {
   display: inline-flex; align-items: center; gap: 9px;
   font: 500 .74rem var(--font-mono); letter-spacing: .04em;
   color: var(--papers-ink); background: var(--surface);
   border: 1px solid var(--hair); border-radius: 999px;
   padding: 8px 18px; margin-bottom: 20px;
 }
-.ad-kicker i { width: 7px; height: 7px; border-radius: 50%; background: var(--papers); }
-.ad-hero h1 {
+.ab-kicker i { width: 7px; height: 7px; border-radius: 50%; background: var(--papers); }
+.ab-hero h1 {
   font-family: var(--font-display); font-weight: 800;
   font-size: clamp(2.1rem, 5vw, 3.3rem);
   letter-spacing: var(--track-xl); line-height: 1.04;
   margin: 0 0 12px; color: var(--ink); text-wrap: balance;
 }
-.ad-hero h1 .muted { color: #b9b2ab; }
-.ad-hero p {
+.ab-hero h1 .muted { color: #b9b2ab; }
+.ab-hero p {
   margin: 0 auto; max-width: 52ch; color: var(--ink-soft);
   font-size: 1rem; line-height: 1.55;
 }
 
 /* ---------------- stat strip ---------------- */
-.ad-stats {
+.ab-stats {
   display: grid; grid-template-columns: repeat(3, 1fr);
   background: var(--surface); border: 1px solid var(--hair);
   border-radius: var(--r-lg); padding: 22px 10px; margin-bottom: 34px;
 }
-.ad-stat { text-align: center; padding: 4px 14px; border-right: 1px solid var(--hair); }
-.ad-stat:last-child { border-right: 0; }
-.ad-stat b {
+.ab-stat { text-align: center; padding: 4px 14px; border-right: 1px solid var(--hair); }
+.ab-stat:last-child { border-right: 0; }
+.ab-stat b {
   display: block; font: 500 1.85rem var(--font-mono);
   color: var(--ink); letter-spacing: -.02em; line-height: 1.1;
 }
-.ad-stat span {
+.ab-stat span {
   display: block; margin-top: 5px;
   font: 400 .68rem var(--font-mono); letter-spacing: .09em;
   text-transform: uppercase; color: var(--muted);
 }
-.ad-stat.is-live b { color: var(--papers-ink); }
+.ab-stat.is-live b { color: var(--papers-ink); }
 
 /* ---------------- tabs ---------------- */
-.ad-tabs {
+.ab-tabs {
   display: inline-flex; gap: 4px; background: var(--wash);
   padding: 5px; border-radius: 999px; margin-bottom: 20px;
 }
-.ad-tab {
+.ab-tab {
   border: 0; cursor: pointer; background: none; color: var(--ink-soft);
   font-family: var(--font-body); font-size: .88rem; font-weight: 600;
   padding: 9px 18px; border-radius: 999px;
   display: inline-flex; align-items: center; gap: 8px;
   transition: background .25s var(--ease), color .25s var(--ease);
 }
-.ad-tab:hover { color: var(--ink); }
-.ad-tab.on { background: var(--surface); color: var(--ink); box-shadow: 0 2px 8px rgba(40,33,41,.09); }
-.ad-tab i {
+.ab-tab:hover { color: var(--ink); }
+.ab-tab.on { background: var(--surface); color: var(--ink); box-shadow: 0 2px 8px rgba(40,33,41,.09); }
+.ab-tab i {
   font: 500 .68rem var(--font-mono); font-style: normal;
   background: var(--wash-strong); color: var(--ink-soft);
   padding: 2px 8px; border-radius: 999px;
 }
-.ad-tab.on i { background: var(--papers-tint); color: var(--papers-ink); }
+.ab-tab.on i { background: var(--papers-tint); color: var(--papers-ink); }
 
 /* ---------------- toolbar (search + add) ---------------- */
-.ad-toolbar { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; }
-.ad-search {
+.ab-toolbar { display: flex; gap: 12px; align-items: center; margin-bottom: 20px; }
+.ab-search {
   flex: 1; background: var(--paper); border: 1px solid var(--hair); border-radius: 999px;
   padding: 11px 18px; font-family: var(--font-body); font-size: .9rem; color: var(--ink);
   transition: border-color .22s var(--ease), box-shadow .22s var(--ease);
 }
-.ad-search:focus { outline: none; border-color: var(--papers); box-shadow: 0 0 0 3px rgba(242,135,0,.16); }
-.ad-toolbar .ad-review-btn { position: static; white-space: nowrap; padding: 11px 22px; }
+.ab-search:focus { outline: none; border-color: var(--papers); box-shadow: 0 0 0 3px rgba(242,135,0,.16); }
+.ab-toolbar .ab-review-btn { position: static; white-space: nowrap; padding: 11px 22px; }
 
 /* ---------------- type/branch/year filters ---------------- */
-.ad-filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 20px; }
-.ad-filter-select {
+.ab-filters { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; margin-bottom: 20px; }
+.ab-filter-select {
   background: var(--wash); border: 0; border-radius: 999px; cursor: pointer;
   padding: 9px 16px; font-family: var(--font-body); font-size: .86rem; font-weight: 600; color: var(--ink-soft);
 }
-/* .ad-dupe already exists below with its own full rule — this only adds
+/* .ab-dupe already exists below with its own full rule — this only adds
    the equivalent badge for "course code not in the registry yet". */
-.ad-newtag {
+.ab-newtag {
   font: 400 .68rem var(--font-mono); padding: 4px 10px; border-radius: 999px;
   background: var(--reference-tint); color: var(--reference-ink);
 }
-.ad-card-actions { display: flex; gap: 8px; flex-shrink: 0; }
-.ad-edit-btn, .ad-delete-btn {
+.ab-card-actions { display: flex; gap: 8px; flex-shrink: 0; }
+.ab-edit-btn, .ab-delete-btn {
   border: 1px solid var(--hair); background: var(--surface); cursor: pointer;
   font-family: var(--font-body); font-size: .82rem; font-weight: 600;
   padding: 8px 16px; border-radius: 999px; color: var(--ink-soft);
   transition: background .22s var(--ease), color .22s var(--ease);
 }
-.ad-edit-btn:hover { background: var(--wash); color: var(--ink); }
-.ad-delete-btn:hover { background: var(--assignment-tint); color: var(--assignment-ink); }
+.ab-edit-btn:hover { background: var(--wash); color: var(--ink); }
+.ab-delete-btn:hover { background: var(--assignment-tint); color: var(--assignment-ink); }
 
 /* ---------------- queue ---------------- */
-.ad-queue { display: grid; gap: 12px; }
-.ad-card {
+.ab-queue { display: grid; gap: 12px; }
+.ab-card {
   background: var(--surface); border: 1px solid var(--hair);
   border-radius: var(--r-lg); padding: 18px 22px;
   display: grid; grid-template-columns: 52px minmax(0,1fr) auto;
   gap: 18px; align-items: center;
   transition: border-color .25s var(--ease), box-shadow .3s var(--ease), transform .3s var(--ease-out-expo);
 }
-.ad-card:hover {
+.ab-card:hover {
   transform: translateY(-2px);
   border-color: rgba(242,135,0,.42);
   box-shadow: 0 14px 30px -16px rgba(70,50,20,.28);
 }
-.ad-fileicon {
+.ab-fileicon {
   width: 52px; height: 62px; border-radius: 9px 13px 9px 9px;
   display: grid; place-items: center;
   background: var(--k-tint, var(--wash)); color: var(--k-ink, var(--ink-soft));
   font: 500 .58rem var(--font-mono); letter-spacing: .06em;
   border: 1px solid rgba(40,33,41,.06);
 }
-.ad-cardmain { min-width: 0; }
-.ad-cardtitle {
+.ab-cardmain { min-width: 0; }
+.ab-cardtitle {
   font-family: var(--font-course); font-weight: 700; font-size: 1.06rem;
   letter-spacing: var(--track-xs); color: var(--ink); margin: 0 0 7px;
   overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
 }
-.ad-cardmeta {
+.ab-cardmeta {
   display: flex; flex-wrap: wrap; gap: 7px 13px; align-items: center;
   font: 400 .75rem var(--font-mono); color: var(--muted);
 }
-.ad-kind { font: 400 .68rem var(--font-mono); padding: 4px 10px; border-radius: 999px;
+.ab-kind { font: 400 .68rem var(--font-mono); padding: 4px 10px; border-radius: 999px;
   background: var(--k-tint); color: var(--k-ink); }
-.ad-dupe { font: 400 .68rem var(--font-mono); padding: 4px 10px; border-radius: 999px;
+.ab-dupe { font: 400 .68rem var(--font-mono); padding: 4px 10px; border-radius: 999px;
   background: var(--assignment-tint); color: var(--assignment-ink); }
-.ad-nocode { color: var(--assignment-ink); }
+.ab-nocode { color: var(--assignment-ink); }
 
 .k-papers     { --k: var(--papers);     --k-tint: var(--papers-tint);     --k-ink: var(--papers-ink); }
 .k-notes      { --k: var(--notes);      --k-tint: var(--notes-tint);      --k-ink: var(--notes-ink); }
 .k-assignment { --k: var(--assignment); --k-tint: var(--assignment-tint); --k-ink: var(--assignment-ink); }
 .k-reference  { --k: var(--reference);  --k-tint: var(--reference-tint);  --k-ink: var(--reference-ink); }
 
-.ad-review-btn {
+.ab-review-btn {
   border: 0; cursor: pointer; color: #fff;
   background: linear-gradient(180deg, #FA9A0A, #F28700);
   font-family: var(--font-body); font-size: .88rem; font-weight: 700;
@@ -193,39 +193,39 @@ body { background: #EADCC2; }
   box-shadow: 0 10px 22px -10px rgba(242,135,0,.65);
   transition: transform .22s var(--ease), box-shadow .22s var(--ease);
 }
-.ad-review-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 26px -10px rgba(242,135,0,.75); }
-.ad-status {
+.ab-review-btn:hover { transform: translateY(-2px); box-shadow: 0 14px 26px -10px rgba(242,135,0,.75); }
+.ab-status {
   font: 400 .72rem var(--font-mono); letter-spacing: .06em; text-transform: uppercase;
   padding: 7px 14px; border-radius: 999px; background: var(--wash); color: var(--muted);
 }
 
-.ad-empty {
+.ab-empty {
   background: var(--surface); border: 1px dashed rgba(40,33,41,.16);
   border-radius: var(--r-lg); padding: 60px 26px; text-align: center;
 }
-.ad-empty b {
+.ab-empty b {
   display: block; font-family: var(--font-display); font-weight: 800;
   font-size: 1.3rem; letter-spacing: var(--track-sm); color: var(--ink); margin-bottom: 7px;
 }
-.ad-empty span { color: var(--muted); font-size: .95rem; }
+.ab-empty span { color: var(--muted); font-size: .95rem; }
 
 /* ---------------- login ---------------- */
-.ad-login-wrap { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
-.ad-login {
+.ab-login-wrap { min-height: 100vh; display: grid; place-items: center; padding: 24px; }
+.ab-login {
   background: var(--surface); border: 1px solid var(--hair);
   border-radius: 28px 48px 28px 28px; padding: 42px 40px;
   width: min(430px,100%); box-shadow: 0 30px 60px -30px rgba(70,50,20,.4);
 }
-.ad-login .ad-kicker { margin-bottom: 18px; }
-.ad-login h1 {
+.ab-login .ab-kicker { margin-bottom: 18px; }
+.ab-login h1 {
   font-family: var(--font-display); font-weight: 800; font-size: 1.9rem;
   letter-spacing: var(--track-md); margin: 0 0 8px; color: var(--ink); line-height: 1.08;
 }
-.ad-login p { margin: 0 0 26px; color: var(--ink-soft); font-size: .95rem; line-height: 1.55; }
+.ab-login p { margin: 0 0 26px; color: var(--ink-soft); font-size: .95rem; line-height: 1.55; }
 
 /* ---------------- fields ---------------- */
-.ad-field { display: block; margin-bottom: 16px; }
-.ad-field > span {
+.ab-field { display: block; margin-bottom: 16px; }
+.ab-field > span {
   display: block; font: 500 .7rem var(--font-mono); color: var(--muted);
   letter-spacing: .08em; text-transform: uppercase; margin-bottom: 8px;
 }
@@ -235,17 +235,17 @@ body { background: #EADCC2; }
    image. The shorthand wiped both -- so the closed select lost its chevron
    entirely, and :focus, which re-set only background-image, got it back
    with repeat restored to the default and tiled it across the whole box. */
-.ad-field input, .ad-field select, .ad-field textarea {
+.ab-field input, .ab-field select, .ab-field textarea {
   width: 100%; box-sizing: border-box;
   background-color: var(--paper); border: 1px solid var(--hair); border-radius: 12px;
   padding: 12px 14px; font-family: var(--font-body); font-size: .94rem; color: var(--ink);
   transition: border-color .22s var(--ease), box-shadow .22s var(--ease);
 }
-.ad-field input:focus, .ad-field select:focus, .ad-field textarea:focus {
+.ab-field input:focus, .ab-field select:focus, .ab-field textarea:focus {
   outline: none; border-color: var(--papers); box-shadow: 0 0 0 3px rgba(242,135,0,.16);
 }
-.ad-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
-.ad-btn-primary {
+.ab-row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+.ab-btn-primary {
   width: 100%; border: 0; cursor: pointer; color: #fff;
   background: linear-gradient(180deg, #FA9A0A, #F28700);
   font-family: var(--font-body); font-size: 1rem; font-weight: 700;
@@ -253,132 +253,132 @@ body { background: #EADCC2; }
   box-shadow: 0 12px 26px -10px rgba(242,135,0,.6);
   transition: transform .22s var(--ease);
 }
-.ad-btn-primary:hover { transform: translateY(-2px); }
-.ad-err {
+.ab-btn-primary:hover { transform: translateY(-2px); }
+.ab-err {
   margin: 0 0 16px; font-size: .88rem; color: var(--assignment-ink);
   background: var(--assignment-tint); border-radius: 12px; padding: 12px 14px;
 }
 
 /* ---------------- review split ---------------- */
-.ad-review { position: fixed; inset: 0; z-index: 80; display: none; }
-.ad-review.open { display: block; }
-.ad-review-back { position: absolute; inset: 0; background: rgba(40,33,41,.55); }
-.ad-review-panel {
+.ab-review { position: fixed; inset: 0; z-index: 80; display: none; }
+.ab-review.open { display: block; }
+.ab-review-back { position: absolute; inset: 0; background: rgba(40,33,41,.55); }
+.ab-review-panel {
   position: absolute; inset: 24px; background: var(--paper);
   border-radius: 26px; overflow: hidden;
   display: grid; grid-template-columns: 1.4fr .9fr;
   /* Without an explicit row track the implicit row is `auto` -- sized to
-     the TALLEST form, not to the panel. .ad-side then grew past the panel,
+     the TALLEST form, not to the panel. .ab-side then grew past the panel,
      `overflow: hidden` above quietly clipped the overspill, and
-     .ad-side-body's `overflow-y: auto` never had a constrained height to
+     .ab-side-body's `overflow-y: auto` never had a constrained height to
      scroll within. minmax(0,1fr) pins the row to the panel instead. */
   grid-template-rows: minmax(0, 1fr);
   box-shadow: 0 50px 100px -30px rgba(0,0,0,.5);
 }
-.ad-pdf { background: #574d44; display: grid; place-items: center; min-height: 0; }
-.ad-pdf iframe { width: 100%; height: 100%; border: 0; }
-.ad-pdf-stub {
+.ab-pdf { background: #574d44; display: grid; place-items: center; min-height: 0; }
+.ab-pdf iframe { width: 100%; height: 100%; border: 0; }
+.ab-pdf-stub {
   color: rgba(255,255,255,.6); font: 400 .82rem var(--font-mono);
   text-align: center; line-height: 1.8; padding: 30px;
 }
 /* Reference-book cover preview — the picked image sits centred on the
    same dark pane the PDF viewer uses, whole and uncropped. */
-.ad-cover-preview { width: 100%; height: 100%; display: grid; place-items: center; padding: 30px; box-sizing: border-box; }
-.ad-cover-preview img {
+.ab-cover-preview { width: 100%; height: 100%; display: grid; place-items: center; padding: 30px; box-sizing: border-box; }
+.ab-cover-preview img {
   max-width: 100%; max-height: 100%; object-fit: contain;
   border-radius: 4px; box-shadow: 0 24px 50px -18px rgba(0,0,0,.6);
 }
-.ad-side { display: flex; flex-direction: column; min-height: 0; border-left: 1px solid var(--hair); }
-.ad-side-head {
+.ab-side { display: flex; flex-direction: column; min-height: 0; border-left: 1px solid var(--hair); }
+.ab-side-head {
   padding: 20px 24px; border-bottom: 1px solid var(--hair);
   display: flex; align-items: center; justify-content: space-between; gap: 12px;
 }
-.ad-side-head h2 {
+.ab-side-head h2 {
   font-family: var(--font-display); font-weight: 800; font-size: 1.2rem;
   letter-spacing: var(--track-sm); margin: 0; color: var(--ink);
 }
-.ad-close {
+.ab-close {
   border: 0; background: var(--wash); cursor: pointer; color: var(--ink-soft);
   width: 32px; height: 32px; border-radius: 50%; font-size: 1.2rem; line-height: 1;
 }
-.ad-close:hover { background: var(--wash-strong); color: var(--ink); }
-.ad-side-body { flex: 1; min-height: 0; overflow-y: auto; padding: 22px 24px; }
-.ad-hint { margin: -9px 0 16px; font: 400 .72rem var(--font-mono); color: var(--notes-ink); }
-.ad-warn {
+.ab-close:hover { background: var(--wash-strong); color: var(--ink); }
+.ab-side-body { flex: 1; min-height: 0; overflow-y: auto; padding: 22px 24px; }
+.ab-hint { margin: -9px 0 16px; font: 400 .72rem var(--font-mono); color: var(--notes-ink); }
+.ab-warn {
   margin: 0 0 18px; padding: 13px 15px; border-radius: 12px;
   background: var(--assignment-tint); color: var(--assignment-ink);
   font-size: .85rem; line-height: 1.5;
 }
-.ad-side-foot {
+.ab-side-foot {
   padding: 16px 24px; border-top: 1px solid var(--hair);
   display: flex; gap: 10px; background: var(--surface);
 }
-.ad-approve, .ad-reject {
+.ab-approve, .ab-reject {
   flex: 1; border: 0; cursor: pointer; padding: 14px 16px; border-radius: 999px;
   font-family: var(--font-body); font-size: .94rem; font-weight: 700;
   transition: transform .22s var(--ease);
 }
-.ad-approve {
+.ab-approve {
   background: linear-gradient(180deg, #FA9A0A, #F28700); color: #fff;
   box-shadow: 0 10px 22px -8px rgba(242,135,0,.6);
 }
-.ad-approve:hover { transform: translateY(-2px); }
-.ad-reject { background: var(--wash); color: var(--assignment-ink); }
-.ad-reject:hover { background: var(--assignment-tint); }
+.ab-approve:hover { transform: translateY(-2px); }
+.ab-reject { background: var(--wash); color: var(--assignment-ink); }
+.ab-reject:hover { background: var(--assignment-tint); }
 
 /* ---------------- responsive ---------------- */
 @media (max-width: 900px) {
-  .ad-stats { grid-template-columns: repeat(2,1fr); gap: 18px 0; }
-  .ad-stat:nth-child(2) { border-right: 0; }
-  .ad-review-panel { grid-template-columns: 1fr; grid-template-rows: 38% 62%; inset: 10px; }
-  .ad-side { border-left: 0; border-top: 1px solid var(--hair); }
+  .ab-stats { grid-template-columns: repeat(2,1fr); gap: 18px 0; }
+  .ab-stat:nth-child(2) { border-right: 0; }
+  .ab-review-panel { grid-template-columns: 1fr; grid-template-rows: 38% 62%; inset: 10px; }
+  .ab-side { border-left: 0; border-top: 1px solid var(--hair); }
 }
 @media (max-width: 620px) {
-  .ad-card { grid-template-columns: 44px minmax(0,1fr); }
-  .ad-card .ad-review-btn, .ad-card .ad-status { grid-column: 2; justify-self: start; }
-  .ad-top { border-radius: var(--r-lg); }
-  .ad-row2 { grid-template-columns: 1fr; }
+  .ab-card { grid-template-columns: 44px minmax(0,1fr); }
+  .ab-card .ab-review-btn, .ab-card .ab-status { grid-column: 2; justify-self: start; }
+  .ab-top { border-radius: var(--r-lg); }
+  .ab-row2 { grid-template-columns: 1fr; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .ad-card, .ad-review-btn, .ad-approve, .ad-btn-primary { transition: none !important; }
+  .ab-card, .ab-review-btn, .ab-approve, .ab-btn-primary { transition: none !important; }
 }
 
 /* Contributors tab: same card, but the "file icon" slot carries initials
    instead of a type, since a person has no filetype to show. */
-.ad-person .ad-fileicon {
+.ab-person .ab-fileicon {
   font: 500 .78rem var(--font-mono); letter-spacing: .04em;
   background: var(--wash-strong); color: var(--ink-soft);
 }
 
 /* Contributors tab — expandable detail: the resources a person is
    credited on, and a control to fold them into another contributor.
-   Lives inside .ad-cardmain (column 2), so an open card grows downward
+   Lives inside .ab-cardmain (column 2), so an open card grows downward
    and the icon/actions align to the top instead of the vertical centre. */
-.ad-person.is-open { align-items: start; }
-.ad-linkbtn {
+.ab-person.is-open { align-items: start; }
+.ab-linkbtn {
   border: 0; background: none; cursor: pointer; padding: 0;
   font: 400 .75rem var(--font-mono); color: var(--papers-ink);
   text-decoration: underline; text-underline-offset: 2px;
 }
-.ad-linkbtn:hover { color: var(--ink); }
-.ad-person-detail {
+.ab-linkbtn:hover { color: var(--ink); }
+.ab-person-detail {
   margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--hair);
   display: grid; gap: 14px;
 }
-.ad-person-resources { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
-.ad-person-resources li {
+.ab-person-resources { list-style: none; margin: 0; padding: 0; display: grid; gap: 7px; }
+.ab-person-resources li {
   display: flex; flex-wrap: wrap; gap: 3px 10px; align-items: baseline;
   font-family: var(--font-body); font-size: .84rem; color: var(--ink);
 }
-.ad-person-resources li span { font: 400 .72rem var(--font-mono); color: var(--muted); }
-.ad-person-merge { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
-.ad-person-merge label {
+.ab-person-resources li span { font: 400 .72rem var(--font-mono); color: var(--muted); }
+.ab-person-merge { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.ab-person-merge label {
   display: flex; flex-wrap: wrap; gap: 8px; align-items: center;
   font-family: var(--font-body); font-size: .84rem; color: var(--ink-soft);
 }
-.ad-person-merge select {
+.ab-person-merge select {
   background: var(--wash); border: 1px solid var(--hair); border-radius: 999px;
   padding: 7px 14px; font-family: var(--font-body); font-size: .82rem; color: var(--ink);
   cursor: pointer;
 }
-.ad-person-merge .ad-hint { flex-basis: 100%; margin: 0; }
+.ab-person-merge .ab-hint { flex-basis: 100%; margin: 0; }

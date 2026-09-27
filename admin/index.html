@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="admin.css?v=12">
+<link rel="stylesheet" href="admin.css?v=13">
 </head>
 <body>
 
@@ -17,58 +17,58 @@
      Login gate. The real check happens server-side; this only
      hides the console until the session cookie exists.
      ============================================================ -->
-<div class="ad-login-wrap" id="loginWrap">
-  <form class="ad-login" id="loginForm">
-    <span class="ad-kicker"><i></i> Abhyas · admin</span>
+<div class="ab-login-wrap" id="loginWrap">
+  <form class="ab-login" id="loginForm">
+    <span class="ab-kicker"><i></i> Abhyas · admin</span>
     <h1>Sign in</h1>
     <p>Publish a resource straight to the archive, or edit/remove one already live.</p>
-    <p class="ad-err" id="loginErr" hidden></p>
-    <label class="ad-field">
+    <p class="ab-err" id="loginErr" hidden></p>
+    <label class="ab-field">
       <span>Password</span>
       <input type="password" id="pw" autocomplete="current-password" required>
     </label>
-    <button class="ad-btn-primary" type="submit">Sign in</button>
+    <button class="ab-btn-primary" type="submit">Sign in</button>
   </form>
 </div>
 
 <!-- ============================================================
      Console
      ============================================================ -->
-<div class="ad-shell" id="console" hidden>
+<div class="ab-shell" id="console" hidden>
 
-  <div class="ad-top">
-    <div class="ad-brand">
+  <div class="ab-top">
+    <div class="ab-brand">
       <img src="../assets/abhyas-mark.png" alt="" width="34" height="34">
       <b>Abhyas</b>
       <span>Admin</span>
     </div>
-    <div class="ad-topright">
-      <span class="ad-who" id="who"></span>
-      <button class="ad-logout" type="button" id="logout">Sign out</button>
+    <div class="ab-topright">
+      <span class="ab-who" id="who"></span>
+      <button class="ab-logout" type="button" id="logout">Sign out</button>
     </div>
   </div>
 
-  <div class="ad-stats">
-    <div class="ad-stat is-live"><b id="sPublished">0</b><span>Published</span></div>
-    <div class="ad-stat"><b id="sContrib">0</b><span>Contributors</span></div>
-    <div class="ad-stat"><b id="sPending">0</b><span>Pending review</span></div>
+  <div class="ab-stats">
+    <div class="ab-stat is-live"><b id="sPublished">0</b><span>Published</span></div>
+    <div class="ab-stat"><b id="sContrib">0</b><span>Contributors</span></div>
+    <div class="ab-stat"><b id="sPending">0</b><span>Pending review</span></div>
   </div>
 
-  <div class="ad-tabs" id="tabs" role="group" aria-label="Queue filter">
-    <button class="ad-tab on" type="button" data-tab="pending">Pending <i id="cPending">0</i></button>
-    <button class="ad-tab" type="button" data-tab="published">Published <i id="cPublished">0</i></button>
-    <button class="ad-tab" type="button" data-tab="trash">Trash <i id="cTrash">0</i></button>
-    <button class="ad-tab" type="button" data-tab="people">Contributors <i id="cPeople">0</i></button>
+  <div class="ab-tabs" id="tabs" role="group" aria-label="Queue filter">
+    <button class="ab-tab on" type="button" data-tab="pending">Pending <i id="cPending">0</i></button>
+    <button class="ab-tab" type="button" data-tab="published">Published <i id="cPublished">0</i></button>
+    <button class="ab-tab" type="button" data-tab="trash">Trash <i id="cTrash">0</i></button>
+    <button class="ab-tab" type="button" data-tab="people">Contributors <i id="cPeople">0</i></button>
   </div>
 
-  <div class="ad-toolbar">
-    <input class="ad-search" type="search" id="search" placeholder="Search by title, code, or contributor&hellip;">
-    <button class="ad-review-btn" type="button" id="btnAdd">+ Add resource</button>
+  <div class="ab-toolbar">
+    <input class="ab-search" type="search" id="search" placeholder="Search by title, code, or contributor&hellip;">
+    <button class="ab-review-btn" type="button" id="btnAdd">+ Add resource</button>
   </div>
 
   <!-- Reuses the site's own .pill component (styles.css) rather than a
        second filter-pill implementation just for the admin console. -->
-  <div class="ad-filters" id="filterBar">
+  <div class="ab-filters" id="filterBar">
     <div class="pills">
       <button class="pill on" data-kind="all" type="button"><i></i> Everything</button>
       <button class="pill" data-kind="papers" type="button"><i style="background:var(--papers)"></i> Past papers</button>
@@ -76,11 +76,11 @@
       <button class="pill" data-kind="assignment" type="button"><i style="background:var(--assignment)"></i> Assignments</button>
       <button class="pill" data-kind="reference" type="button"><i style="background:var(--reference)"></i> Reference</button>
     </div>
-    <select class="ad-filter-select" id="filterDept"><option value="all">Branch: All</option></select>
-    <select class="ad-filter-select" id="filterYear"><option value="all">Year: All</option></select>
+    <select class="ab-filter-select" id="filterDept"><option value="all">Branch: All</option></select>
+    <select class="ab-filter-select" id="filterYear"><option value="all">Year: All</option></select>
   </div>
 
-  <div class="ad-queue" id="queue"></div>
+  <div class="ab-queue" id="queue"></div>
 </div>
 
 <!-- ============================================================
@@ -89,23 +89,23 @@
      picked, rendered entirely in your browser before anything is
      uploaded. When editing, it's the file already live on the site.
      ============================================================ -->
-<div class="ad-review" id="review" role="dialog" aria-modal="true" aria-labelledby="revTitle">
-  <div class="ad-review-back" id="reviewBack"></div>
-  <div class="ad-review-panel">
+<div class="ab-review" id="review" role="dialog" aria-modal="true" aria-labelledby="revTitle">
+  <div class="ab-review-back" id="reviewBack"></div>
+  <div class="ab-review-panel">
 
-    <div class="ad-pdf" id="pdfPane"></div>
+    <div class="ab-pdf" id="pdfPane"></div>
 
-    <div class="ad-side">
-      <div class="ad-side-head">
+    <div class="ab-side">
+      <div class="ab-side-head">
         <h2 id="revTitle">Add resource</h2>
-        <button class="ad-close" type="button" id="revClose" aria-label="Close">&times;</button>
+        <button class="ab-close" type="button" id="revClose" aria-label="Close">&times;</button>
       </div>
 
-      <div class="ad-side-body">
-        <p class="ad-warn" id="dupeWarn" hidden></p>
-        <p class="ad-hint" id="submissionInfo" hidden></p>
+      <div class="ab-side-body">
+        <p class="ab-warn" id="dupeWarn" hidden></p>
+        <p class="ab-hint" id="submissionInfo" hidden></p>
 
-        <label class="ad-field" id="fileField">
+        <label class="ab-field" id="fileField">
           <span id="fileFieldLabel">PDF file</span>
           <input type="file" id="fFile" accept="application/pdf">
         </label>
@@ -113,27 +113,27 @@
              it's a pointer to a real book, not a copy of one — so it skips
              the file entirely and takes a link out instead. Any other type
              still requires the PDF field above. -->
-        <p class="ad-hint" id="noFileHint" hidden>Reference books don't need a file — add a link to find it online instead.</p>
+        <p class="ab-hint" id="noFileHint" hidden>Reference books don't need a file — add a link to find it online instead.</p>
 
-        <label class="ad-field">
+        <label class="ab-field">
           <span>Course code</span>
           <input type="text" id="fCode" list="codeList" placeholder="CS2110">
         </label>
         <datalist id="codeList"></datalist>
-        <p class="ad-hint" id="codeHint" hidden></p>
+        <p class="ab-hint" id="codeHint" hidden></p>
 
-        <label class="ad-field">
+        <label class="ab-field">
           <span>Course name</span>
           <input type="text" id="fCourse">
         </label>
 
-        <label class="ad-field">
+        <label class="ab-field">
           <span>Branch</span>
           <select id="fDept"></select>
         </label>
 
-        <div class="ad-row2">
-          <label class="ad-field">
+        <div class="ab-row2">
+          <label class="ab-field">
             <span>Type</span>
             <select id="fType">
               <option value="papers">Past paper / quiz</option>
@@ -146,7 +146,7 @@
                why "2025" on its own is the one field two people reliably
                fill in two different ways. The option VALUE is still the
                single start-year integer the record stores. -->
-          <label class="ad-field">
+          <label class="ab-field">
             <span>Academic year</span>
             <select id="fYear"></select>
           </label>
@@ -159,7 +159,7 @@
              review, losing what the student actually wrote. The datalist
              keeps the common answers one keystroke away without closing the
              door on the rest. -->
-        <label class="ad-field">
+        <label class="ab-field">
           <span>Exam type</span>
           <input type="text" id="fExam" list="examList" placeholder="Mid-Sem, Quiz 2, Lab Manual… (optional)" autocomplete="off">
           <datalist id="examList">
@@ -177,23 +177,23 @@
              It is normally derived (course — exam type) and stays derived
              while this is blank, so correcting a course name corrects the
              title everywhere too. Type here only to override that. -->
-        <label class="ad-field" id="titleField">
+        <label class="ab-field" id="titleField">
           <span>Display title</span>
           <input type="text" id="fTitle" autocomplete="off">
         </label>
-        <p class="ad-hint" id="titleHint">Leave blank to build it from the course name and exam type.</p>
+        <p class="ab-hint" id="titleHint">Leave blank to build it from the course name and exam type.</p>
 
         <!-- Reference books carry the payload library.html renders. Without it
              the Bookshelf filters the record out and the shelf shows nothing. -->
         <div id="bookFields" hidden>
-          <label class="ad-field"><span>Book title</span><input type="text" id="fBookTitle" placeholder="Thomas' Calculus"></label>
-          <div class="ad-row2">
-            <label class="ad-field"><span>Book author</span><input type="text" id="fBookAuthor"></label>
-            <label class="ad-field"><span>Publisher</span><input type="text" id="fBookPublisher"></label>
+          <label class="ab-field"><span>Book title</span><input type="text" id="fBookTitle" placeholder="Thomas' Calculus"></label>
+          <div class="ab-row2">
+            <label class="ab-field"><span>Book author</span><input type="text" id="fBookAuthor"></label>
+            <label class="ab-field"><span>Publisher</span><input type="text" id="fBookPublisher"></label>
           </div>
-          <div class="ad-row2">
-            <label class="ad-field"><span>Pages</span><input type="number" id="fBookPages" min="1"></label>
-            <label class="ad-field">
+          <div class="ab-row2">
+            <label class="ab-field"><span>Pages</span><input type="number" id="fBookPages" min="1"></label>
+            <label class="ab-field">
               <span>Cover</span>
               <select id="fBookCover">
                 <option value="ink">Ink</option><option value="amber">Amber</option>
@@ -202,31 +202,31 @@
               </select>
             </label>
           </div>
-          <label class="ad-field"><span>Summary</span><textarea id="fBookGist" rows="5" placeholder="A couple of paragraphs on what the book covers and why it's on this list."></textarea></label>
-          <label class="ad-field"><span>Link to find it online</span><input type="url" id="fBookLink" placeholder="https://..."></label>
+          <label class="ab-field"><span>Summary</span><textarea id="fBookGist" rows="5" placeholder="A couple of paragraphs on what the book covers and why it's on this list."></textarea></label>
+          <label class="ab-field"><span>Link to find it online</span><input type="url" id="fBookLink" placeholder="https://..."></label>
         </div>
 
-        <label class="ad-field">
+        <label class="ab-field">
           <span>Professor</span>
           <input type="text" id="fProf" placeholder="Comma-separated if more than one">
         </label>
 
-        <div class="ad-row2">
-          <label class="ad-field">
+        <div class="ab-row2">
+          <label class="ab-field">
             <span>Contributor</span>
             <input type="text" id="fContrib" placeholder="Leave blank for no credit">
           </label>
-          <label class="ad-field">
+          <label class="ab-field">
             <span>Roll number</span>
             <input type="text" id="fRoll" placeholder="MS24BTECH11021" maxlength="20" autocomplete="off">
           </label>
         </div>
       </div>
 
-      <div class="ad-side-foot">
-        <button class="ad-reject" type="button" id="btnDelete" hidden>Delete</button>
-        <button class="ad-reject" type="button" id="btnReject" hidden>Reject</button>
-        <button class="ad-approve" type="button" id="btnSave">Publish</button>
+      <div class="ab-side-foot">
+        <button class="ab-reject" type="button" id="btnDelete" hidden>Delete</button>
+        <button class="ab-reject" type="button" id="btnReject" hidden>Reject</button>
+        <button class="ab-approve" type="button" id="btnSave">Publish</button>
       </div>
     </div>
 
@@ -237,6 +237,6 @@
 <div class="toast" id="toast" aria-live="polite" hidden></div>
 
 <script src="../data.js?v=14"></script>
-<script src="admin.js?v=22"></script>
+<script src="admin.js?v=23"></script>
 </body>
 </html>

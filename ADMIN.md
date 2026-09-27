@@ -102,3 +102,8 @@ Check `abhyas-private/backups/` for the snapshot from just before —
 comparing it to the current `resources.json` shows exactly what changed
 (`diff old new`). Nothing here ever loses more than one write's worth of
 history, by construction.
+
+If the admin counts load but the tabs or resource cards disappear, inspect
+browser cosmetic filtering before changing server data. The old `ad-top`,
+`ad-tabs` and `ad-card` CSS classes matched generic EasyList hiding rules;
+the console now uses `ab-` classes so a browser blocker can stay enabled.
