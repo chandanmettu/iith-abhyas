@@ -7445,6 +7445,43 @@ main > #shelves { padding-top: 34px; padding-bottom: var(--section-y); }
   --dz-tint: var(--papers-tint);
 }
 
+.cg-book-notice {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+  padding: 18px 20px;
+  border: 1px solid var(--reference);
+  border-radius: var(--r-md);
+  background: var(--reference-tint);
+  color: var(--reference-ink);
+}
+.cg-book-notice > div { display: grid; gap: 4px; }
+.cg-book-notice-kicker {
+  font: 500 .68rem var(--font-mono);
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+.cg-book-notice strong { font: 700 1rem var(--font-body); }
+.cg-book-notice p { margin: 0; font-size: .86rem; line-height: 1.5; }
+.cg-book-notice a {
+  flex: none;
+  padding: 9px 13px;
+  border: 1px solid var(--reference);
+  border-radius: 999px;
+  color: var(--reference-ink);
+  font: 700 .8rem var(--font-body);
+  text-decoration: none;
+  white-space: nowrap;
+}
+.cg-book-notice a:hover, .cg-book-notice a:focus-visible {
+  background: var(--surface);
+}
+@media (max-width: 700px) {
+  .cg-book-notice { align-items: flex-start; flex-direction: column; }
+}
+
 .cg-intake-kinds { display: flex; flex-direction: column; }
 
 /* one per row here, not four across — it reads as a "choose one" list

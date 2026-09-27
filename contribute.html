@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@700&family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Mono:wght@400;500&family=Instrument+Serif:ital@0;1&family=Newsreader:ital,opsz,wght@1,6..72,300;1,6..72,400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="styles.css?v=165">
+<link rel="stylesheet" href="styles.css?v=166">
 </head>
 <body>
 <div class="shell">
@@ -259,6 +259,15 @@
         <!-- Panel 1 — direct upload -->
         <div class="cg-panel on" id="cgPanel-files" role="tabpanel">
 
+          <aside class="cg-book-notice" aria-label="Reference book upload notice">
+            <div>
+              <span class="cg-book-notice-kicker">Reference books</span>
+              <strong>Please do not upload reference book PDFs.</strong>
+              <p>Just send us the book title and author. Uploading the book itself may raise copyright issues.</p>
+            </div>
+            <a href="mailto:ms24btech11021@iith.ac.in?subject=Abhyas%20reference%20book%20suggestion&amp;body=Book%20title%3A%0AAuthor%3A%0ACourse%20code%20%28optional%29%3A" aria-label="Email a reference book title and author without attaching the book">Send title &amp; author <span aria-hidden="true">↗</span></a>
+          </aside>
+
           <div class="cg-intake-split">
 
             <div class="cg-intake-kinds">
@@ -266,7 +275,7 @@
                 <span>Resource Kind</span>
               </label>
               <div class="cg-kind-selector" id="cgKindSelector"></div>
-              <p class="cg-label-hint">Suggesting a reference book? Use Email Dispatch.</p>
+              <p class="cg-label-hint">PDF uploads are for papers, notes, and assignments only.</p>
             </div>
 
             <div class="cg-intake-drop">
@@ -425,7 +434,7 @@
                 <li><b>To</b><span>ms24btech11021@iith.ac.in</span></li>
                 <li><b>Subject</b><span>Abhyas contribution</span></li>
                 <li><b>Body</b><span>Course code, professor, semester &amp; year, credit</span></li>
-                <li><b>Attach</b><span>Your PDF or scan</span></li>
+                <li><b>Attach</b><span>Papers and notes only; no book PDFs</span></li>
               </ul>
             </div>
 
@@ -433,7 +442,7 @@
               <p class="cg-submit-terms">
                 Emails are processed in accordance with our <a href="terms.html">terms</a>.
               </p>
-              <a class="cta-solid" href="mailto:ms24btech11021@iith.ac.in?subject=Abhyas%20contribution&body=Course%20name%20%26%20code%3A%0AInstructor%20%2F%20Professor%3A%0ASemester%20%26%20academic%20year%20%28e.g.%20Sem%202%202025-26%29%3A%0AType%20%28past%20paper%20/%20notes%20/%20assignment%20/%20reference%20book%29%3A%0ACredit%20me%20as%20%28or%20write%3A%20anonymous%29%3A%0A%0AAttach%20the%20file%28s%29%20before%20you%20send.">
+              <a class="cta-solid" href="mailto:ms24btech11021@iith.ac.in?subject=Abhyas%20contribution&amp;body=Course%20name%20%26%20code%3A%0AInstructor%20%2F%20Professor%3A%0ASemester%20%26%20academic%20year%20%28e.g.%20Sem%202%202025-26%29%3A%0AType%20%28past%20paper%20/%20notes%20/%20assignment%20/%20reference%20book%29%3A%0ABook%20title%20and%20author%20%28if%20suggesting%20a%20book%29%3A%0ACredit%20me%20as%20%28or%20write%3A%20anonymous%29%3A%0A%0AAttach%20only%20papers%2C%20notes%2C%20or%20assignments.%20Do%20not%20attach%20book%20PDFs.">
                 Open Email Client
                 <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
               </a>
@@ -515,7 +524,7 @@
                 <span class="ctr-rule-mark">
                   <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
                 </span>
-                <span class="ctr-rule-text"><b>Pirated books.</b> Send titles &mdash; Bookshelf links legal copies.</span>
+                <span class="ctr-rule-text"><b>Reference book PDFs.</b> Send the title and author only; uploading the book may raise copyright issues.</span>
               </li>
               <li class="ctr-rule-row">
                 <span class="ctr-rule-mark">
