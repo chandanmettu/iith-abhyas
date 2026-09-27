@@ -198,7 +198,8 @@
       deptSel.innerHTML = `<option value="all">Branch: All</option>` +
         DEPARTMENTS.map((d) => `<option value="${esc(d.code)}">${esc(d.code)}</option>`).join("");
     }
-    const years = new Set([...state.items, ...state.pending].map((i) => i.year).filter(Boolean));
+    const years = new Set([...state.items, ...state.pending]
+      .map((i) => validAcademicYear(i.year)).filter((y) => y !== null));
     const yearSel = document.getElementById("filterYear");
     const current = yearSel.value;
     yearSel.innerHTML = `<option value="all">Year: All</option>` +
@@ -649,7 +650,7 @@
     document.getElementById("fCode").value = it.code || "";
     document.getElementById("fCourse").value = it.course || "";
     document.getElementById("fType").value = it.type || "papers";
-    fillYears(it.year);
+    fillYears(it.year, true);
     document.getElementById("fExam").value = it.examType || "";
     document.getElementById("fProf").value = it.professor || "";
     document.getElementById("fContrib").value = it.contributor || "";
@@ -763,23 +764,36 @@
      under-IC bug waiting to happen again. Nothing on the public site
      filters the archive by this field (app.js groups by course), so GEN
      costs nothing beyond being honest. */
+  function validAcademicYear(value) {
+    const raw = String(value ?? "").trim();
+    if (!/^(?:19|20)\d{2}$/.test(raw)) return null;
+    const year = Number(raw);
+    return year <= new Date().getFullYear() + 1 ? year : null;
+  }
+
   /* Academic years, newest first, back far enough to cover anything worth
      archiving. The label is the span ("2025-26"); the value is the start
      year, which is what the record, the id and the filename all carry.
      Defaults to the session in progress -- terms start around July, so
      before then "this year" is still the one that began last calendar
      year. A record whose stored year predates the list keeps its own
-     option rather than being silently snapped to another year. */
-  function fillYears(selected) {
+     option rather than being silently snapped to another year. An invalid
+     stored year stays visible as a warning, but can never be selected. */
+  function fillYears(selected, requireChoice = false) {
     const sel = document.getElementById("fYear");
     const now = new Date();
     const current = now.getMonth() >= 6 ? now.getFullYear() : now.getFullYear() - 1;
     const years = [];
     for (let y = current; y >= current - 14; y--) years.push(y);
-    const chosen = Number(selected) || current;
-    if (!years.includes(chosen)) years.push(chosen);
+    const stored = validAcademicYear(selected);
+    const hasStoredValue = selected !== null && selected !== undefined && String(selected).trim() !== "";
+    const chosen = stored ?? (requireChoice || hasStoredValue ? null : current);
+    if (chosen !== null && !years.includes(chosen)) years.push(chosen);
     years.sort((a, b) => b - a);
-    sel.innerHTML = years.map((y) =>
+    const prompt = hasStoredValue && stored === null
+      ? `Invalid saved year (${esc(selected)}) — choose an academic year`
+      : "Choose academic year";
+    sel.innerHTML = (chosen === null ? `<option value="" selected>${prompt}</option>` : "") + years.map((y) =>
       `<option value="${y}"${y === chosen ? " selected" : ""}>${esc(academicYear(y))}</option>`).join("");
   }
 
@@ -899,6 +913,11 @@
     const f = readForm();
     if (!f.code || !f.course || !f.department) {
       alert("Course code, name, and branch are required.");
+      return;
+    }
+    if (!validAcademicYear(f.year)) {
+      alert("Choose a valid academic year before saving.");
+      document.getElementById("fYear").focus();
       return;
     }
     if (f.type === "reference" && !f.bookAuthor) {
