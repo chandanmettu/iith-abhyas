@@ -973,26 +973,41 @@
 
   async function doDelete(id) {
     const it = state.items.find((x) => x.id === id);
-    if (!it) return;
-    if (!confirm(`Remove "${it.title}" from the archive listing?\n\nIt moves to Trash for 14 days (restorable there), then drops for good. The PDF file itself is never touched — it stays on disk regardless.`)) return;
-    await api("delete", { id });
-    loadList();
-    toast(`Moved "${it.title}" to Trash.`);
+    if (!it) return false;
+    if (!confirm(`Remove "${it.title}" from the archive listing?\n\nIt moves to Trash for 14 days (restorable there), then drops for good. The PDF file itself is never touched — it stays on disk regardless.`)) return false;
+    try {
+      const r = await api("delete", { id });
+      if (!r.ok) throw new Error(r.error || "Could not move the resource to Trash.");
+      loadList();
+      toast(`Moved "${it.title}" to Trash.`);
+      return true;
+    } catch (ex) {
+      alert(ex.message);
+      return false;
+    }
   }
-  document.getElementById("btnDelete").addEventListener("click", () => {
-    if (state.current) { doDelete(state.current.id); closePanel(); }
+  document.getElementById("btnDelete").addEventListener("click", async () => {
+    if (state.current && await doDelete(state.current.id)) closePanel();
   });
 
   async function doReject(id) {
     const it = state.pending.find((x) => x.id === id);
-    if (!it) return;
-    const reason = prompt("Reason for rejecting? (kept for your own records, not shown to the student)") ?? "";
-    await api("reject", { id, reason });
-    loadList();
-    toast("Rejected.");
+    if (!it) return false;
+    const reason = prompt("Reason for rejecting? (kept for your own records, not shown to the student)");
+    if (reason === null) return false;
+    try {
+      const r = await api("reject", { id, reason });
+      if (!r.ok) throw new Error(r.error || "Could not reject the submission.");
+      loadList();
+      toast("Rejected.");
+      return true;
+    } catch (ex) {
+      alert(ex.message);
+      return false;
+    }
   }
-  document.getElementById("btnReject").addEventListener("click", () => {
-    if (state.current) { doReject(state.current.id); closePanel(); }
+  document.getElementById("btnReject").addEventListener("click", async () => {
+    if (state.current && await doReject(state.current.id)) closePanel();
   });
 
   /* No cron on shared hosting — the server purges anything past 14 days
@@ -1005,9 +1020,14 @@
   }
 
   async function doRestore(id) {
-    await api("restore", { id });
-    loadList();
-    toast("Restored.");
+    try {
+      const r = await api("restore", { id });
+      if (!r.ok) throw new Error(r.error || "Could not restore the resource.");
+      loadList();
+      toast("Restored.");
+    } catch (ex) {
+      alert(ex.message);
+    }
   }
 
   function esc(s) {
