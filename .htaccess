@@ -4,3 +4,11 @@
 # needs a path starting with / (not a bare filename) to be treated as
 # a real page rather than a literal string to print.
 ErrorDocument 404 /404.html
+
+# Repo notes, scripts and internal folders are not part of the public site
+<FilesMatch "(^\.|\.(sql|md|log|bak|env|gs|py)$)">
+  Require all denied
+</FilesMatch>
+<IfModule mod_alias.c>
+  RedirectMatch 403 ^/(docs|_local|tests|supabase)(/|$)
+</IfModule>
