@@ -404,7 +404,7 @@ if ($action === 'update_contributor') {
   }
 
   // Uppercased and stripped of spaces, so "ms24 btech 11021" and
-  // "CS24BTECH11001" cannot become two spellings of one person's roll.
+  // "MS24BTECH11021" cannot become two spellings of one person's roll.
   if (array_key_exists('roll', $body)) {
     $people[$id]['roll'] = strtoupper(preg_replace('/\s+/', '', (string) $body['roll']));
   }

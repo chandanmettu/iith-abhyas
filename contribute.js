@@ -326,7 +326,7 @@
       const semester = (document.getElementById("cgLinkSemester")?.value || "").trim();
       const notes = (document.getElementById("cgLinkNotes")?.value || "").trim();
       const body = `Folder link: ${url}\nSemester / year: ${semester || "Not provided"}\nCourses / instructors / notes: ${notes || "Not provided"}\n\nPlease check that anyone with the link can view the folder.`;
-      window.location.href = `mailto:hello@chandanmettu.com?subject=${encodeURIComponent("Abhyas cloud folder contribution")}&body=${encodeURIComponent(body)}`;
+      window.location.href = `mailto:ms24btech11021@iith.ac.in?subject=${encodeURIComponent("Abhyas cloud folder contribution")}&body=${encodeURIComponent(body)}`;
     });
   }
 

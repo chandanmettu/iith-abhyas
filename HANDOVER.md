@@ -61,13 +61,32 @@ going to an inbox nobody reads any more.
 These are **known and were deliberately deferred**, not overlooked. Each one
 is quick to fix; the entry tells you how.
 
-### 3.1 Contact address
+### 3.1 The contact address is a student email
 
-All contact links use `hello@chandanmettu.com`. Better long-term: `abhyas@iith.online` forwarded to the current maintainer, then swap with:
+`ms24btech11021@iith.ac.in` is hardcoded in **11 places** across all six
+pages. It is a roll-number address, so it will be deactivated after that
+student graduates.
+
+This matters more than it looks: **`terms.html` promises that takedown
+requests go to this inbox.** A takedown promise pointing at a dead mailbox is
+the kind of thing that becomes somebody's problem.
+
+To change it everywhere, from the project folder:
 
 ```bash
-grep -rl 'hello@chandanmettu.com' *.html *.js | xargs sed -i '' 's/hello@chandanmettu\.com/abhyas@iith.online/g'
+grep -rl 'ms24btech11021@iith.ac.in' *.html | xargs sed -i '' 's/ms24btech11021@iith\.ac\.in/NEW@ADDRESS/g'
 ```
+
+Then check nothing was missed:
+
+```bash
+grep -c 'ms24btech11021@iith.ac.in' *.html
+```
+
+**Best fix:** an address on the domain the project already owns
+(`abhyas@iith.online`) forwarded to whoever currently maintains the site.
+Then the address on the site never has to change again — only the forwarding
+target does.
 
 ### 3.2 The vote counter runs on a personal Google account
 

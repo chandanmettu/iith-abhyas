@@ -76,7 +76,7 @@ function academicYear(startYear) {
 }
 
 
-/* A contributor's `roll` is now the FULL institute roll (CS24BTECH11001),
+/* A contributor's `roll` is now the FULL institute roll (MS24BTECH11021),
    not the batch token it used to be (MS24) — a name alone doesn't identify
    anyone once two students share one, and the roll is the id the institute
    already uses. Public surfaces still show only the batch: the full roll

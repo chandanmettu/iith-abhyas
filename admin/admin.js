@@ -327,7 +327,7 @@
     if (!p) return;
     const name = prompt(`Name for this contributor:`, p.name || "");
     if (name === null) return;
-    const roll = prompt(`Full roll number for ${name.trim() || "them"} — e.g. CS24BTECH11001.\n\nOnly the batch (MS24) is ever shown publicly.`, p.roll || "");
+    const roll = prompt(`Full roll number for ${name.trim() || "them"} — e.g. MS24BTECH11021.\n\nOnly the batch (MS24) is ever shown publicly.`, p.roll || "");
     if (roll === null) return;
     try {
       const r = await api("update_contributor", { id, name: name.trim(), roll: roll.trim() });
